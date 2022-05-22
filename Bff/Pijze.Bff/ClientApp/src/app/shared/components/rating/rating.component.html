@@ -1,0 +1,10 @@
+<mat-icon
+  *ngFor="let i of maxRating | numberToArray"
+  (click)="onClick(i + 1)"
+  (mouseenter)="onStartHover(i + 1)"
+  (mouseleave)="onStopHover()"
+>
+  {{
+    (rating && rating >= i + 1) || hoverRating >= i + 1 ? "star" : "star_border"
+  }}
+</mat-icon>

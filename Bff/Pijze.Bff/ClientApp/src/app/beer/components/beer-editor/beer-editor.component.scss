@@ -1,0 +1,39 @@
+.mat-form-field {
+  width: 100%;
+  min-width: 200px;
+}
+
+mat-card {
+  max-width: 400px;
+  padding: 45px 50px 40px 50px;
+}
+
+mat-card-title {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+button {
+  margin-top: 20px;
+  width: 100%;
+}
+
+:host {
+  margin-top: 100px;
+}

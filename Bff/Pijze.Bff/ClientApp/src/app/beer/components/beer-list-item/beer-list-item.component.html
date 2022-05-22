@@ -1,0 +1,12 @@
+<mat-card>
+  <div class="image-container">
+    <beer-image [beerId]="beer.id"></beer-image>
+  </div>
+  <mat-card-content>
+    <div class="beer-content">
+      <rating [rating]="beer.rating" [readOnly]="true"></rating>
+      <h3 class="beer-manufacturer">{{ beer.manufacturer }}</h3>
+      <div class="beer-name">{{ beer.name }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

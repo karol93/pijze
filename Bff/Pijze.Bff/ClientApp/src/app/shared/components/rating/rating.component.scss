@@ -1,0 +1,9 @@
+.mat-icon {
+  color: #e6d834;
+}
+
+:host.ng-touched.ng-invalid {
+  .mat-icon {
+    color: #f44336;
+  }
+}

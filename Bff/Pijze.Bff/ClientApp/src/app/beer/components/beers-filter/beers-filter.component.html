@@ -1,0 +1,22 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="50px"
+  [formGroup]="filtersForm"
+>
+  <mat-form-field appearance="outline" fxFlex="20">
+    <mat-icon matPrefix color="primary">search</mat-icon>
+    <input matInput formControlName="text" />
+  </mat-form-field>
+
+  <rating formControlName="rating"></rating>
+
+  <button
+    type="button"
+    mat-stroked-button
+    color="primary"
+    (click)="clearFilters()"
+  >
+    Clear filters
+  </button>
+</div>

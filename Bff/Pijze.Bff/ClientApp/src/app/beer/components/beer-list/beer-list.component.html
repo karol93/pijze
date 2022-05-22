@@ -1,0 +1,16 @@
+<ng-container *ngIf="beers.length">
+  <div
+    *ngFor="let beersChunk of beers | chunk: 4"
+    class="container"
+    fxLayout
+    fxLayoutAlign="center"
+    fxLayoutGap="20px"
+  >
+    <beer-list-item
+      (click)="onBeerClick(beer.id)"
+      class="beer-card"
+      *ngFor="let beer of beersChunk"
+      [beer]="beer"
+    ></beer-list-item>
+  </div>
+</ng-container>
