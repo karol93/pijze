@@ -49,5 +49,5 @@ public class Beer
     private void SetName(string name) =>
         Name = string.IsNullOrEmpty(name) ? throw new ArgumentNullException(nameof(name)) : name;
 
-    private void SetImage(BeerImage image) => Image = image ?? throw new ArgumentNullException(nameof(image));
+    private void SetImage(BeerImage image) => Image = image;
 }

@@ -1,4 +1,5 @@
 ﻿using Pijze.Application.Beers.Commands;
+using Pijze.Application.Beers.Exceptions;
 using Pijze.Application.Common.Commands;
 using Pijze.Domain.Beers;
 
@@ -16,7 +17,7 @@ internal class DeleteBeerHandler : ICommandHandler<DeleteBeer>
     public async Task HandleAsync(DeleteBeer command)
     {
         var beer = await _beerRepository.FindAsync(command.Id);
-        if(beer == null) return;
+        if(beer == null) throw new BeerNotFoundException($"Beer with id {command.Id} was not found.");;
         _beerRepository.Delete(beer);
     }
 }
