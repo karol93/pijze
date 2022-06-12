@@ -30,4 +30,7 @@
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Pijze.Api.Tests" />
+  </ItemGroup>
 </Project>

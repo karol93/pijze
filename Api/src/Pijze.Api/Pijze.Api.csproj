@@ -29,5 +29,9 @@
     <_ContentIncludedByDefault Remove="wwwroot\assets\600x800.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Pijze.Api.Tests" />
+  </ItemGroup>
+
 
 </Project>

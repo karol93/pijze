@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pijze.Application.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pijze.Tests.Shared", "Api\tests\Pijze.Tests.Shared\Pijze.Tests.Shared.csproj", "{6B903D2D-A94E-4470-BDFB-34D2ED5E9097}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pijze.Api.Tests", "Api\tests\Pijze.Api.Tests\Pijze.Api.Tests.csproj", "{A4C9D2E0-7CE0-4DEA-8BBA-7D0EAA45531C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{6B903D2D-A94E-4470-BDFB-34D2ED5E9097}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B903D2D-A94E-4470-BDFB-34D2ED5E9097}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B903D2D-A94E-4470-BDFB-34D2ED5E9097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C9D2E0-7CE0-4DEA-8BBA-7D0EAA45531C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C9D2E0-7CE0-4DEA-8BBA-7D0EAA45531C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C9D2E0-7CE0-4DEA-8BBA-7D0EAA45531C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C9D2E0-7CE0-4DEA-8BBA-7D0EAA45531C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +89,6 @@ Global
 		{EDD89D42-1045-4DCD-8536-76BB3122C923} = {74F06081-C328-4FAF-B4AC-27FF6A4FF69A}
 		{41B4AD8F-2C81-47B3-A1CD-412C9D183538} = {74F06081-C328-4FAF-B4AC-27FF6A4FF69A}
 		{6B903D2D-A94E-4470-BDFB-34D2ED5E9097} = {74F06081-C328-4FAF-B4AC-27FF6A4FF69A}
+		{A4C9D2E0-7CE0-4DEA-8BBA-7D0EAA45531C} = {74F06081-C328-4FAF-B4AC-27FF6A4FF69A}
 	EndGlobalSection
 EndGlobal

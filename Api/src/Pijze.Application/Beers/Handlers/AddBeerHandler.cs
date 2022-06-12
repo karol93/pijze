@@ -18,8 +18,9 @@ internal class AddBeerHandler : ICommandHandler<AddBeer>
 
     public Task HandleAsync(AddBeer command)
     {
-        _beerRepository.Add(Beer.Create(Guid.NewGuid(), command.Name, command.Manufacturer, command.Rating,
-            BeerImage.Create(command.Photo, _imageService)));
+        var beer = Beer.Create(Guid.NewGuid(), command.Name, command.Manufacturer, command.Rating,
+            BeerImage.Create(command.Photo, _imageService));
+        _beerRepository.Add(beer);
         return Task.CompletedTask;
     }
 }

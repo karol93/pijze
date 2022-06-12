@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Pijze.Api;
 using Pijze.Api.Security.AuthorizationHandlers;
 using Pijze.Api.Security.Requirements;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
