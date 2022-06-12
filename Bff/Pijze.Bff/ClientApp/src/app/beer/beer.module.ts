@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../shared';
 import { BeerRoutingModule } from './beer-routing.module';
@@ -20,9 +22,12 @@ import {
   BeersFilterComponent,
 } from './components';
 import { BeerComponent, BeersComponent } from './containers';
+import { BeerEffects, beerReducer } from './store';
 
 @NgModule({
   imports: [
+    StoreModule.forFeature('beer', beerReducer),
+    EffectsModule.forFeature([BeerEffects]),
     BeerRoutingModule,
     SharedModule,
     MatCardModule,

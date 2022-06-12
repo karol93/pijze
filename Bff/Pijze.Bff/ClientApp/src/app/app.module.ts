@@ -3,18 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthService, CoreModule } from './core';
+import { CoreModule } from './core';
 import { AppInitializerService } from './app-initializer.service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export function initializeAppFactory(
   appInitializerService: AppInitializerService
 ) {
   return (): Observable<any> => {
-    console.log(appInitializerService);
     return appInitializerService.init();
   };
 }
@@ -27,6 +30,13 @@ export function initializeAppFactory(
     BrowserAnimationsModule,
     CoreModule,
     NgxSpinnerModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      name: 'Pijze Store DevTools',
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     {
