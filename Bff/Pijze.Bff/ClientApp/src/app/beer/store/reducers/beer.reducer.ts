@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { BeerListItem } from '../../models';
 import { BeerActions } from '../actions';
 
@@ -12,10 +12,16 @@ const initialState: BeerState = {
   error: '',
 };
 
-export const beerReducer = createReducer<BeerState>(
-  initialState,
-  on(BeerActions.loadBeers, (state) => ({
-    ...state,
-  })),
-  on(BeerActions.loadBeersSuccess, (state, { beers }) => ({ ...state, beers }))
-);
+export const beerReducer = createFeature({
+  name: 'beer',
+  reducer: createReducer(
+    initialState,
+    on(BeerActions.loadBeers, (state) => ({
+      ...state,
+    })),
+    on(BeerActions.loadBeersSuccess, (state, { beers }) => ({
+      ...state,
+      beers,
+    }))
+  ),
+});

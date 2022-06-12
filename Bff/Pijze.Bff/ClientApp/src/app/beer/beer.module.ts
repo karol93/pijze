@@ -26,7 +26,7 @@ import { BeerEffects, beerReducer } from './store';
 
 @NgModule({
   imports: [
-    StoreModule.forFeature('beer', beerReducer),
+    StoreModule.forFeature(beerReducer),
     EffectsModule.forFeature([BeerEffects]),
     BeerRoutingModule,
     SharedModule,
