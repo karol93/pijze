@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { BeerListItem } from '../../models';
+import { BeerFilters, BeerListItem } from '../../models';
 
 export const loadBeers = createAction('[Beer] Load Beers');
 export const loadBeersSuccess = createAction(
@@ -7,3 +7,8 @@ export const loadBeersSuccess = createAction(
   props<{ beers: ReadonlyArray<BeerListItem> }>()
 );
 export const loadBeersFail = createAction('[Beer] Load Beers Fail');
+
+export const filterBeers = createAction(
+  '[Beer] Filter Beers',
+  props<{ filters: BeerFilters | null }>()
+);

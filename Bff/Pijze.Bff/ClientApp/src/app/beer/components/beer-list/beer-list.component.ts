@@ -14,7 +14,7 @@ import { BeerListItem } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BeerListComponent {
-  @Input() beers: Array<BeerListItem> = [];
+  @Input() beers: ReadonlyArray<BeerListItem> = [];
   @Output() beerClick = new EventEmitter<string>();
 
   onBeerClick(id: string): void {

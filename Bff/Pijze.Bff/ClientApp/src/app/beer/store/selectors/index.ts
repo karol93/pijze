@@ -1,1 +1,1 @@
-export { getBeers } from './beer.selectors';
+export { getBeers, isDataLoading } from './beer.selectors';

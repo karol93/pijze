@@ -8,9 +8,6 @@ const routes: Routes = [
   {
     path: '',
     component: BeersComponent,
-    resolve: {
-      beers: BeersResolver,
-    },
   },
   {
     path: 'add',

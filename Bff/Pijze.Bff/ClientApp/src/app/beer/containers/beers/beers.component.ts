@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { BeerFilters, BeerListItem } from '../../models';
+import { BeerActions, BeerState } from '../../store';
+import { getBeers, isDataLoading } from '../../store/selectors';
 
 @Component({
   selector: 'beers',
@@ -8,31 +12,23 @@ import { BeerFilters, BeerListItem } from '../../models';
   styleUrls: ['./beers.component.scss'],
 })
 export class BeersComponent implements OnInit {
-  beerList: Array<BeerListItem> = [];
-  beerListFiltered: Array<BeerListItem> = [];
-
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  beers$!: Observable<ReadonlyArray<BeerListItem>>;
+  isDataLoading$!: Observable<boolean>;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private store: Store<BeerState>
+  ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(
-      (data: any) => (this.beerList = this.beerListFiltered = data.beers)
-    );
+    this.store.dispatch(BeerActions.loadBeers());
+    this.beers$ = this.store.select(getBeers);
+    this.isDataLoading$ = this.store.select(isDataLoading);
   }
 
-  onBeerClick(id: string): void {
+  onBeerClick = (id: string) =>
     this.router.navigate(['edit', id], { relativeTo: this.route });
-  }
 
-  onBeersFilter(filters: BeerFilters | null): void {
-    if (filters) {
-      const lowerText = filters.text.toLocaleLowerCase();
-      this.beerListFiltered = this.beerList.filter(
-        (beer) =>
-          (lowerText && lowerText.length
-            ? beer.name.toLocaleLowerCase().startsWith(lowerText) ||
-              beer.manufacturer.toLocaleLowerCase().startsWith(lowerText)
-            : true) && (filters.rating ? beer.rating == filters.rating : true)
-      );
-    } else this.beerListFiltered = this.beerList;
-  }
+  onBeersFilter = (filters: BeerFilters | null) =>
+    this.store.dispatch(BeerActions.filterBeers({ filters }));
 }

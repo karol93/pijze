@@ -2,7 +2,8 @@
   <beers-filter (beersFilter)="onBeersFilter($event)"></beers-filter>
   <beer-list
     id="beer-list"
-    [beers]="beerListFiltered"
+    [beers]="(beers$ | async) ?? []"
     (beerClick)="onBeerClick($event)"
   ></beer-list>
 </div>
+<spinner [visible]="(isDataLoading$ | async) || false"></spinner>

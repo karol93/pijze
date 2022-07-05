@@ -4,8 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatIconModule } from '@angular/material/icon';
 import { LazyLoadImageModule, LAZYLOAD_IMAGE_HOOKS } from 'ng-lazyload-image';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
-import { RatingComponent } from './components';
+import { RatingComponent, SpinnerComponent } from './components';
 import { LazyLoadImageHooks } from './hooks';
 import { AuthImagePipe, ChunkPipe, NumberToArrayPipe } from './pipes';
 
@@ -15,8 +16,15 @@ import { AuthImagePipe, ChunkPipe, NumberToArrayPipe } from './pipes';
     MatIconModule,
     CommonModule,
     LazyLoadImageModule,
+    NgxSpinnerModule,
   ],
-  declarations: [ChunkPipe, NumberToArrayPipe, RatingComponent, AuthImagePipe],
+  declarations: [
+    ChunkPipe,
+    NumberToArrayPipe,
+    RatingComponent,
+    AuthImagePipe,
+    SpinnerComponent,
+  ],
   exports: [
     ReactiveFormsModule,
     ChunkPipe,
@@ -24,6 +32,7 @@ import { AuthImagePipe, ChunkPipe, NumberToArrayPipe } from './pipes';
     NumberToArrayPipe,
     AuthImagePipe,
     LazyLoadImageModule,
+    SpinnerComponent,
   ],
   providers: [{ provide: LAZYLOAD_IMAGE_HOOKS, useClass: LazyLoadImageHooks }],
 })
