@@ -18,4 +18,13 @@
       <Folder Include="wwwroot" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Remove="ClientApp\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Update="ClientApp\dist\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 </Project>
