@@ -16,13 +16,14 @@ builder.Services
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
-	options.Authority = "https://dev-xmrkem7o.us.auth0.com";
+	var issuer = builder.Configuration.GetSection("JwtConfig:Issuer").Value;
+	options.Authority = issuer;
 	options.TokenValidationParameters = new TokenValidationParameters
 	{
 		ValidateAudience = true,
 		ValidAudiences = builder.Configuration.GetSection("JwtConfig:Audience").Value.Split(";"),
 		ValidateIssuer = true,
-		ValidIssuer = builder.Configuration.GetSection("JwtConfig:Issuer").Value,
+		ValidIssuer = builder.Configuration.GetSection(issuer).Value,
 	};
 });
 
