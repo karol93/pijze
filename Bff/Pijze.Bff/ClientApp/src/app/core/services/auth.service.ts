@@ -5,6 +5,7 @@ import { UserInfo } from '../models';
 
 const routes = {
   login: () => `/api/auth/login`,
+  logout: () => `/api/auth/logout`,
   getUser: () => `api/auth/get-user`,
 };
 
@@ -33,8 +34,8 @@ export class AuthService {
     window.location.href = routes.login();
   }
 
-  public logout(): Observable<boolean> {
+  public logout(): void {
     this._isAuthenticated.next(false);
-    return of(true);
+    window.location.href = routes.logout();
   }
 }

@@ -14,10 +14,5 @@ export class AppComponent implements OnInit {
     // this.isLogged = this.authService.isAuthenticated();
   }
 
-  logout(): void {
-    this.authService
-      .logout()
-      .subscribe(() => this.router.navigate(['/auth/login']));
-  }
   title = 'Pijze.Client';
 }

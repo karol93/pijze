@@ -17,6 +17,5 @@ export class AppHeaderComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/auth/login']);
   }
 }

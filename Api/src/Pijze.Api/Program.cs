@@ -29,6 +29,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.AddAuthorization(o =>
 {
+	o.AddPolicy("admin", p=>p.RequireRole("Admin"));
 	o.AddPolicy("read:pijze", p => p.RequireAuthenticatedUser().AddRequirements(new ScopeRequirement("read:pijze")));
 });
 

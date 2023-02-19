@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pijze.Bff.Models;
 
@@ -12,6 +14,14 @@ public class AuthController : ControllerBase
     public IActionResult Login([FromQuery] string? returnUrl = "/")
     {
         return new ChallengeResult("Auth0", new AuthenticationProperties() { RedirectUri = returnUrl });
+    }
+    
+    [Authorize]
+    [HttpGet("logout")]
+    public async Task Logout()
+    {
+        await HttpContext.SignOutAsync("Auth0");
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
     
     [HttpGet("get-user")]
