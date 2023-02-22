@@ -1,9 +1,8 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-namespace Pijze.Infrastructure.Data.Migrations
+namespace Pijze.Infrastructure.Data.EntityFramework.Migrations
 {
     public partial class Init : Migration
     {

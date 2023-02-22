@@ -1,24 +1,25 @@
 ﻿using Pijze.Application.Beers.Dto;
 using Pijze.Application.Beers.Queries;
 using Pijze.Application.Common.Queries;
-using Pijze.Infrastructure.Data;
+using Pijze.Infrastructure.Data.DbExecutors;
 
 namespace Pijze.Infrastructure.Queries.Beers;
 
 internal class FindBeerHandler : IQueryHandler<FindBeer, BeerDto?>
 {
-    private readonly PijzeDbContext _context;
-
-    public FindBeerHandler(PijzeDbContext context)
+    private readonly IDbExecutorFactory _dbExecutorFactory;
+    
+    public FindBeerHandler(IDbExecutorFactory dbExecutorFactory)
     {
-        _context = context;
+        _dbExecutorFactory = dbExecutorFactory;
     }
 
     public async Task<BeerDto?> HandleAsync(FindBeer query)
     {
-        var beer = await _context.Beers.FindAsync(query.Id);
-        return beer is null
-            ? null
-            : new BeerDto(beer.Id, beer.Manufacturer, beer.Name, beer.Rating,  beer.Image.ToBase64());
+        using var db = await _dbExecutorFactory.CreateExecutor();
+        var beer = await db.QueryFirstOrDefault<BeerDto>(
+            "SELECT beer.Id, beer.Manufacturer, beer.Name, beer.Rating, beer.Image as Photo FROM main.Beers beer where beer.Id = @beerId",
+            new {beerId = query.Id});
+        return beer;
     }
 }

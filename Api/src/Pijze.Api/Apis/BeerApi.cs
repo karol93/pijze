@@ -9,12 +9,12 @@ internal class BeerApi : IApi
 {
     public void Register(WebApplication app)
     {
-        app.MapGet("/api/beer/{id}", Get).RequireAuthorization("read:pijze");
-        app.MapGet("/api/beer/{id}/image", GetBeerImage).RequireAuthorization("read:pijze");
+        app.MapGet("/api/beer/{id:guid}", Get).RequireAuthorization("read:pijze");
+        app.MapGet("/api/beer/{id:guid}/image", GetBeerImage).RequireAuthorization("read:pijze");
         app.MapGet("/api/beer", GetAll).RequireAuthorization("read:pijze");
         app.MapPost("/api/beer", Post).RequireAuthorization("read:pijze", "admin");
-        app.MapPost("/api/beer/{id}", Update).RequireAuthorization("read:pijze", "admin");
-        app.MapDelete("/api/beer/{id}", Delete).RequireAuthorization("read:pijze", "admin");
+        app.MapPost("/api/beer/{id:guid}", Update).RequireAuthorization("read:pijze", "admin");
+        app.MapDelete("/api/beer/{id:guid}", Delete).RequireAuthorization("read:pijze", "admin");
     }
 
     async Task<IResult> Get(Guid id, IQueryDispatcher dispatcher)

@@ -1,22 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Pijze.Application.Beers.Queries;
+﻿using Pijze.Application.Beers.Queries;
 using Pijze.Application.Common.Queries;
-using Pijze.Infrastructure.Data;
+using Pijze.Infrastructure.Data.DbExecutors;
 
 namespace Pijze.Infrastructure.Queries.Beers;
 
 internal class GetBeerImageHandler : IQueryHandler<GetBeerImage, byte[]?>
 {
-    private readonly PijzeDbContext _context;
+    private readonly IDbExecutorFactory _dbExecutorFactory;
 
-    public GetBeerImageHandler(PijzeDbContext context)
+    public GetBeerImageHandler(IDbExecutorFactory dbExecutorFactory)
     {
-        _context = context;
+        _dbExecutorFactory = dbExecutorFactory;
     }
 
     public async Task<byte[]?> HandleAsync(GetBeerImage query)
     {
-        var image = await _context.Beers.Where(x => x.Id == query.BeerId).AsNoTracking().Select(x => x.Image).FirstOrDefaultAsync();
-        return image?.Bytes;
+        using var db = await _dbExecutorFactory.CreateExecutor();
+        var image = await db.ExecuteScalar<byte[]?>(
+            "SELECT beer.Image FROM main.Beers beer where beer.Id = @beerId",
+            new {beerId = query.BeerId});
+        return image;
     }
 }

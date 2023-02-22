@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
-using Pijze.Application.Common.Caching;
 using Pijze.Application.Common.Commands;
 using Pijze.Application.Common.Queries;
 using Pijze.Domain.SeedWork;
 using Pijze.Domain.Services;
 using Pijze.Infrastructure.Caching;
 using Pijze.Infrastructure.Commands;
-using Pijze.Infrastructure.Data;
-using Pijze.Infrastructure.Data.Repositories;
+using Pijze.Infrastructure.Data.DbExecutors;
+using Pijze.Infrastructure.Data.EntityFramework;
+using Pijze.Infrastructure.Data.EntityFramework.Repositories;
 using Pijze.Infrastructure.Images;
 using Pijze.Infrastructure.Queries;
 
@@ -19,6 +19,9 @@ public static class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
     {
+        var dbExecutorFactory = new SqlLiteExecutorFactory(connectionString);
+        services.AddSingleton<IDbExecutorFactory>(dbExecutorFactory);
+   
         services.AddDbContext<PijzeDbContext>(c => c.UseSqlite(connectionString));
         services.Scan(scan => scan.FromAssemblyOf<BeerRepository>().AddClasses(classes => classes.AssignableTo<IRepository>()).AsImplementedInterfaces().WithScopedLifetime());
             

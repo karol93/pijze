@@ -1,22 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Pijze.Application.Beers.Dto;
+﻿using Pijze.Application.Beers.Dto;
 using Pijze.Application.Beers.Queries;
 using Pijze.Application.Common.Queries;
-using Pijze.Infrastructure.Data;
+using Pijze.Infrastructure.Data.DbExecutors;
 
 namespace Pijze.Infrastructure.Queries.Beers;
 
 internal class GetBeersHandler : IQueryHandler<GetBeers, IEnumerable<BeerListItemDto>>
 {
-    private readonly PijzeDbContext _context;
+    private readonly IDbExecutorFactory _dbExecutorFactory;
 
-    public GetBeersHandler(PijzeDbContext context)
+    public GetBeersHandler(IDbExecutorFactory dbExecutorFactory)
     {
-        _context = context;
+        _dbExecutorFactory = dbExecutorFactory;
     }
 
     public async Task<IEnumerable<BeerListItemDto>> HandleAsync(GetBeers query)
     {
-        return await _context.Beers.OrderByDescending(x=>x.CreationDate).AsNoTracking().Select(beer => new BeerListItemDto(beer.Id, beer.Manufacturer, beer.Name, beer.Rating)).ToListAsync();
+        using var db = await _dbExecutorFactory.CreateExecutor();
+        var beers = await db.Query<BeerListItemDto>(
+            "SELECT beer.Id, beer.Manufacturer, beer.Name, beer.Rating FROM main.Beers beer");
+        return beers;
     }
 }

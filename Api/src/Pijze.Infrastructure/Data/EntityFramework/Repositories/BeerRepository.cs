@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pijze.Domain.Beers;
 
-namespace Pijze.Infrastructure.Data.Repositories;
+namespace Pijze.Infrastructure.Data.EntityFramework.Repositories;
 
 internal class BeerRepository : IBeerRepository
 {

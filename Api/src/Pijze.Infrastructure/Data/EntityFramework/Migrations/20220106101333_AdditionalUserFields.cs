@@ -1,9 +1,8 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-namespace Pijze.Infrastructure.data.migrations
+namespace Pijze.Infrastructure.Data.EntityFramework.Migrations
 {
     public partial class AdditionalUserFields : Migration
     {

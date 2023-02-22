@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pijze.Domain.Beers;
-using Pijze.Infrastructure.Data.Configurations;
+using Pijze.Infrastructure.Data.EntityFramework.Configurations;
 
-namespace Pijze.Infrastructure.Data;
+namespace Pijze.Infrastructure.Data.EntityFramework;
 
 internal class PijzeDbContext : DbContext
 {

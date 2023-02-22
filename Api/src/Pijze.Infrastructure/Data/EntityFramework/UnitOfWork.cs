@@ -1,7 +1,6 @@
 ﻿using Pijze.Domain.SeedWork;
-using System.Threading.Tasks;
 
-namespace Pijze.Infrastructure.Data;
+namespace Pijze.Infrastructure.Data.EntityFramework;
 
 internal sealed class UnitOfWork : IUnitOfWork
 {
