@@ -7,9 +7,9 @@ using Yarp.ReverseProxy.Transforms;
 
 namespace Pijze.Bff;
 
-public static class Extensions
+internal static class Extensions
 {
-    public static IServiceCollection AddProxy(this IServiceCollection services, ConfigurationManager configuration)
+    internal static IServiceCollection AddProxy(this IServiceCollection services, ConfigurationManager configuration)
     {
         var reverseProxyConfig = configuration.GetSection("ReverseProxy") ??
                                  throw new ArgumentException("ReverseProxy section not found");
@@ -32,7 +32,7 @@ public static class Extensions
         return services;
     }
 
-    public static IServiceCollection AddAuthentication(this IServiceCollection services,
+    internal static IServiceCollection AddAuthentication(this IServiceCollection services,
         ConfigurationManager configuration)
     {
         services.AddAuthentication(options =>
