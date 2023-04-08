@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Pijze.Domain.Beers;
+using Pijze.Domain.Entities;
 
 namespace Pijze.Tests.Shared.Builders.Beers;
 

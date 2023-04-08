@@ -1,26 +1,24 @@
 ﻿using Pijze.Application.Beers.Commands;
 using Pijze.Application.Common.Commands;
-using Pijze.Domain.Beers;
-using Pijze.Domain.Services;
+using Pijze.Domain.Entities;
+using Pijze.Domain.Services.Interfaces;
 
 namespace Pijze.Application.Beers.Handlers;
 
 internal class AddBeerHandler : ICommandHandler<AddBeer>
 {
-    private readonly IBeerRepository _beerRepository;
+    private readonly IBeerService _beerService;
     private readonly IImageService _imageService;
 
-    public AddBeerHandler(IBeerRepository beerRepository, IImageService imageService)
+    public AddBeerHandler(IBeerService beerService, IImageService imageService)
     {
-        _beerRepository = beerRepository;
+        _beerService = beerService;
         _imageService = imageService;
     }
 
-    public Task HandleAsync(AddBeer command)
+    public async Task HandleAsync(AddBeer command)
     {
-        var beer = Beer.Create(Guid.NewGuid(), command.Name, command.Manufacturer, command.Rating,
+        await _beerService.Create(Guid.NewGuid(), command.Name, command.BreweryId, command.Rating,
             BeerImage.Create(command.Photo, _imageService));
-        _beerRepository.Add(beer);
-        return Task.CompletedTask;
     }
 }

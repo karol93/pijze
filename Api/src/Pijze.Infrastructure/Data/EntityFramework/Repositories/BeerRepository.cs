@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pijze.Domain.Beers;
+using Pijze.Domain.Entities;
+using Pijze.Domain.Repositories;
 
 namespace Pijze.Infrastructure.Data.EntityFramework.Repositories;
 
@@ -12,7 +13,7 @@ internal class BeerRepository : IBeerRepository
         _beers = context.Beers;
     }
 
-    public async Task<Beer?> FindAsync(Guid id) => await _beers.FindAsync(id);
+    public async Task<Beer?> Find(Guid id) => await _beers.FindAsync(id);
     public void Add(Beer beer) => _beers.Add(beer);
 
     public void Delete(Beer beer) => _beers.Remove(beer);

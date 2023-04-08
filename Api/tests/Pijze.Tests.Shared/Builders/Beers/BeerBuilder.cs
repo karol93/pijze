@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Pijze.Domain.Beers;
+using Pijze.Domain.Entities;
 
 namespace Pijze.Tests.Shared.Builders.Beers;
 
@@ -9,13 +9,6 @@ public class BeerBuilder : DomainObjectBuilder<Beer>
     {
         PropertyInfo property = typeof(Beer).GetProperty(nameof(Beer.Name))!;
         property!.SetValue(Obj, name);
-        return this;
-    }
-    
-    public BeerBuilder WithManufacturer(string manufacturer)
-    {
-        PropertyInfo property = typeof(Beer).GetProperty(nameof(Beer.Manufacturer))!;
-        property!.SetValue(Obj, manufacturer);
         return this;
     }
     

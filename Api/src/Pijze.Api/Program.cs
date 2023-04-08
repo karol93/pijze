@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Pijze.Api;
 using Pijze.Api.Security.AuthorizationHandlers;
 using Pijze.Api.Security.Requirements;
+using Pijze.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
 	.AddApis()
+	.AddDomain()
 	.AddInfrastructure(builder.Configuration.GetConnectionString("PijzeDb"));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

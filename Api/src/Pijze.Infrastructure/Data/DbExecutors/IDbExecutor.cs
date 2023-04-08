@@ -9,7 +9,7 @@ internal interface IDbExecutor : IDisposable
     Task<IEnumerable<T>> Query<T>(
         string sql,
         object? param = null) where T : class;
-
+    
     public Task<T?> QueryFirstOrDefault<T>(
         string sql,
         object? param = null) where T : class;

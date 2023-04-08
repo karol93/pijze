@@ -18,7 +18,8 @@ internal class GetBeersHandler : IQueryHandler<GetBeers, IEnumerable<BeerListIte
     {
         using var db = await _dbExecutorFactory.CreateExecutor();
         var beers = await db.Query<BeerListItemDto>(
-            "SELECT beer.Id, beer.Manufacturer, beer.Name, beer.Rating FROM main.Beers beer");
+            @"SELECT beer.Id, brewery.Name as Manufacturer, beer.Name, beer.Rating FROM Beers beer
+                 JOIN Breweries brewery on brewery.Id = beer.BreweryId");
         return beers;
     }
 }

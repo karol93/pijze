@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS8618
 
-using Pijze.Domain.Services;
+using Pijze.Domain.Services.Interfaces;
 
-namespace Pijze.Domain.Beers;
+namespace Pijze.Domain.Entities;
 
 public class BeerImage : IEquatable<BeerImage>
 {

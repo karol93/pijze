@@ -17,7 +17,7 @@ internal class GetBeerImageHandler : IQueryHandler<GetBeerImage, byte[]?>
     {
         using var db = await _dbExecutorFactory.CreateExecutor();
         var image = await db.ExecuteScalar<byte[]?>(
-            "SELECT beer.Image FROM main.Beers beer where beer.Id = @beerId",
+            "SELECT beer.Image FROM Beers beer where beer.Id = @beerId",
             new {beerId = query.BeerId});
         return image;
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Pijze.Infrastructure.Data;
+using Pijze.Infrastructure.Data.EntityFramework;
 
 namespace Pijze.Api.Tests;
 

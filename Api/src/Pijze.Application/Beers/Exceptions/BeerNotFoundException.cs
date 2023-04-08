@@ -1,6 +1,8 @@
-﻿namespace Pijze.Application.Beers.Exceptions;
+﻿using Pijze.Domain.SeedWork;
 
-public class BeerNotFoundException : Exception
+namespace Pijze.Application.Beers.Exceptions;
+
+public class BeerNotFoundException : PijzeException
 {
     public BeerNotFoundException(string message) : base(message)
     {

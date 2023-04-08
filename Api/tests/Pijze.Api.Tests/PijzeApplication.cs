@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Pijze.Api.Tests.Security;
-using Pijze.Domain.Beers;
 using Pijze.Domain.Services;
 using Pijze.Infrastructure.Data;
 

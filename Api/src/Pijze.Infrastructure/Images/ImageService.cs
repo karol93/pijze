@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using Pijze.Domain.Services;
+using Pijze.Domain.Services.Interfaces;
 
 namespace Pijze.Infrastructure.Images;
 

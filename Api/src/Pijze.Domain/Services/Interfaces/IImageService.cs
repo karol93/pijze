@@ -1,4 +1,4 @@
-﻿namespace Pijze.Domain.Services;
+﻿namespace Pijze.Domain.Services.Interfaces;
 
 public interface IImageService
 {

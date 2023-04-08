@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pijze.Domain.Beers;
+using Pijze.Domain.Entities;
 using Pijze.Infrastructure.Data.EntityFramework.Configurations;
 
 namespace Pijze.Infrastructure.Data.EntityFramework;
@@ -11,10 +11,11 @@ internal class PijzeDbContext : DbContext
     }
 
     public DbSet<Beer> Beers => Set<Beer>();
+    public DbSet<Brewery> Breweries => Set<Brewery>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new BeerConfiguration());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PijzeDbContext).Assembly);
     }
 }

@@ -5,6 +5,7 @@ using Pijze.Application.Common.Commands;
 using Pijze.Application.Common.Queries;
 using Pijze.Domain.SeedWork;
 using Pijze.Domain.Services;
+using Pijze.Domain.Services.Interfaces;
 using Pijze.Infrastructure.Caching;
 using Pijze.Infrastructure.Commands;
 using Pijze.Infrastructure.Data.DbExecutors;

@@ -74,6 +74,10 @@ internal static class Extensions
                     {
                         bffSwaggerDocument.Paths.Add(path.Key, path.Value);
                     }
+                    foreach (var schema in apiSwaggerDocument.Components.Schemas)
+                    {
+                        bffSwaggerDocument.Components.Schemas.Add(schema.Key,schema.Value);
+                    }
                 }
           
                 await context.Response.WriteAsync(

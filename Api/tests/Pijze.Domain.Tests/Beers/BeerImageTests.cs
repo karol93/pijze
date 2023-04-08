@@ -1,8 +1,9 @@
 ﻿using System;
 using FluentAssertions;
 using Moq;
-using Pijze.Domain.Beers;
+using Pijze.Domain.Entities;
 using Pijze.Domain.Services;
+using Pijze.Domain.Services.Interfaces;
 using Xunit;
 
 namespace Pijze.Domain.Tests.Beers;
