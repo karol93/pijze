@@ -1,4 +1,6 @@
-﻿#pragma warning disable CS8618
+﻿using Pijze.Domain.SeedWork;
+
+#pragma warning disable CS8618
 
 namespace Pijze.Domain.Entities;
 
@@ -8,19 +10,19 @@ public class Brewery
     {
     }
 
-    private Brewery(Guid id, string name)
+    private Brewery(AggregateId id, string name)
     {
-        Id = id == Guid.Empty ? throw new ArgumentException(nameof(id)) : id;
+        Id = id;
         SetName(name);
         CreationDate = DateTime.UtcNow;
     }
     
-    public static Brewery Create(Guid id, string name)
+    public static Brewery Create(AggregateId id, string name)
     {
         return new Brewery(id, name);
     }
 
-    public Guid Id { get; private set; }
+    public AggregateId Id { get; private set; }
     public string Name { get; private set; }
     public DateTime CreationDate { get; private set; }
     

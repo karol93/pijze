@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pijze.Domain.Entities;
 using Pijze.Domain.Repositories;
+using Pijze.Domain.SeedWork;
 
 namespace Pijze.Infrastructure.Data.EntityFramework.Repositories;
 
@@ -13,9 +14,9 @@ internal class BreweryRepository : IBreweryRepository
         _breweries = context.Breweries;
     }
 
-    public async Task<bool> Exists(Guid id) => await _breweries.AnyAsync(x => x.Id == id);
+    public async Task<bool> Exists(AggregateId id) => await _breweries.AnyAsync(x => x.Id == id);
 
-    public async Task<Brewery?> Find(Guid id) => await _breweries.FindAsync(id);
+    public async Task<Brewery?> Find(AggregateId id) => await _breweries.FindAsync(id);
 
     public void Add(Brewery brewery) => _breweries.Add(brewery);
 
