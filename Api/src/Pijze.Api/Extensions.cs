@@ -1,4 +1,5 @@
 ﻿using Pijze.Api.Apis;
+using Pijze.Api.Middlewares;
 
 namespace Pijze.Api;
 
@@ -22,6 +23,8 @@ public static class Extensions
         }
 
         return app;
-
     }
+
+    public static IApplicationBuilder UseExceptionHandlerMiddleware(this IApplicationBuilder builder) =>
+        builder.UseMiddleware<CustomExceptionHandlerMiddleware>();
 }

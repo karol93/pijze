@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Moq;
 using Pijze.Application.Beers.Commands;
 using Pijze.Application.Beers.Handlers;
-using Pijze.Domain.Services;
+using Pijze.Domain.SeedWork;
+using Pijze.Domain.Services.Interfaces;
+using Pijze.Domain.ValueObjects;
 using Xunit;
 
 namespace Pijze.Application.Tests.Beers.Handlers;
@@ -10,13 +13,18 @@ namespace Pijze.Application.Tests.Beers.Handlers;
 public class AddBeerHandlerTests
 {
     [Fact]
-    public async Task ShouldCallAddMethodOnRepository()
+    public async Task ShouldCallCreateMethodOnService()
     {
-        // var repository = new Mock<IBeerRepository>();
-        // var handler = new AddBeerHandler(repository.Object, new Mock<IImageService>().Object);
-        //
-        // await handler.HandleAsync(new AddBeer("Test", "test", 4, "ASDKOASODA=="));
-        //
-        // repository.Verify(r => r.Add(It.IsAny<Beer>()), Times.Once);
+        var beerService = new Mock<IBeerService>();
+        var imageService = new Mock<IImageService>();
+        var handler = new AddBeerHandler(beerService.Object, imageService.Object);
+        string name = "Test";
+        Guid breweryId = Guid.NewGuid();
+        int rating = 4;
+        string photo = "ASDKOASODA==";
+        
+        await handler.HandleAsync(new AddBeer(name, breweryId, rating, photo));
+        
+        beerService.Verify(r => r.Create(It.IsAny<AggregateId>(), name, breweryId, rating, It.IsAny<BeerImage>()), Times.Once);
     }
 }

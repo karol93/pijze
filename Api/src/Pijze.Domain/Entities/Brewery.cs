@@ -1,4 +1,5 @@
-﻿using Pijze.Domain.SeedWork;
+﻿using Pijze.Domain.Exceptions;
+using Pijze.Domain.SeedWork;
 
 #pragma warning disable CS8618
 
@@ -32,5 +33,5 @@ public class Brewery
     }
     
     private void SetName(string name) =>
-        Name = string.IsNullOrEmpty(name) ? throw new ArgumentNullException(nameof(name)) : name;
+        Name = string.IsNullOrEmpty(name) ? throw new InvalidBreweryNameException() : name;
 }

@@ -6,8 +6,8 @@ public record Rating
 {
     private const int MinValue = 1;
     private const int MaxValue = 5;
-    
-    public Rating(int value)
+
+    private Rating(int value)
     {
         if (value is < MinValue or > MaxValue)
         {
@@ -18,9 +18,11 @@ public record Rating
         Value = value;
     }
     
+    public static Rating Create(int value) => new(value);
+    
     public int Value { get; }
     
-    public static implicit operator int(Rating rating) => rating;
+    public static implicit operator int(Rating rating) => rating.Value;
 
     public static implicit operator Rating(int rating) => new(rating);
 }

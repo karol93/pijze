@@ -1,4 +1,5 @@
-﻿using Pijze.Domain.SeedWork;
+﻿using Pijze.Domain.Exceptions;
+using Pijze.Domain.SeedWork;
 using Pijze.Domain.ValueObjects;
 
 #pragma warning disable CS8618
@@ -42,7 +43,7 @@ public class Beer
     private void SetBrewery(AggregateId breweryId) => BreweryId = breweryId;
 
     private void SetName(string name) =>
-        Name = string.IsNullOrEmpty(name) ? throw new ArgumentNullException(nameof(name)) : name;
+        Name = string.IsNullOrEmpty(name) ? throw new InvalidBeerNameException() : name;
 
     private void SetImage(BeerImage image) => Image = image;
 }

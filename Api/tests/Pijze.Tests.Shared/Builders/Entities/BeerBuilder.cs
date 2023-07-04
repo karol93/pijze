@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using Pijze.Domain.Entities;
+using Pijze.Domain.ValueObjects;
 
-namespace Pijze.Tests.Shared.Builders.Beers;
+namespace Pijze.Tests.Shared.Builders.Entities;
 
 public class BeerBuilder : DomainObjectBuilder<Beer>
 {

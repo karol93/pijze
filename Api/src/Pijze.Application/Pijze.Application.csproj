@@ -15,4 +15,7 @@
       <_Parameter1>Pijze.Application.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+  </ItemGroup>
 </Project>

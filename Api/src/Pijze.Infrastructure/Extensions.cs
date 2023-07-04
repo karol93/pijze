@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Pijze.Application.Beers.Commands;
 using Pijze.Application.Common.Commands;
 using Pijze.Application.Common.Queries;
 using Pijze.Domain.SeedWork;
@@ -40,6 +42,7 @@ public static class Extensions
 
         services.Decorate(typeof(ICommandHandler<>), typeof(TransactionalCommandHandlerDecorator<>));
         services.Decorate(typeof(ICommandHandler<>), typeof(CachingCommandHandlerDecorator<>));
+        services.Decorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
         services.Decorate(typeof(IQueryHandler<,>), typeof(CachingQueryHandlerDecorator<,>));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -48,6 +51,8 @@ public static class Extensions
 
         services.AddMemoryCache();
         services.AddSingleton<ICacheStore>(x => new MemoryCacheStore(x.GetRequiredService<IMemoryCache>()));
+
+        services.AddValidatorsFromAssemblyContaining<AddBeer.AddBeerValidator>(includeInternalTypes: true);
         
         return services;
     }

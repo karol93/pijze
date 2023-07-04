@@ -2,6 +2,7 @@
 using Pijze.Application.Common.Commands;
 using Pijze.Domain.Entities;
 using Pijze.Domain.Services.Interfaces;
+using Pijze.Domain.ValueObjects;
 
 namespace Pijze.Application.Beers.Handlers;
 

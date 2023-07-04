@@ -1,4 +1,6 @@
-﻿using Pijze.Application.Breweries.Commands;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Pijze.Application.Breweries.Commands;
+using Pijze.Application.Breweries.Dto;
 using Pijze.Application.Breweries.Queries;
 using Pijze.Infrastructure.Commands;
 using Pijze.Infrastructure.Queries;
@@ -9,39 +11,43 @@ internal class BreweryApi : IApi
 {
     public void Register(WebApplication app)
     {
-        app.MapGet("/api/brewery/{id:guid}", Get).RequireAuthorization("read:pijze", "admin");
-        app.MapGet("/api/brewery", GetAll).RequireAuthorization("read:pijze", "admin");
-        app.MapPost("/api/brewery", Post).RequireAuthorization("read:pijze", "admin");
-        app.MapPost("/api/brewery/{id:guid}", Update).RequireAuthorization("read:pijze", "admin");
-        app.MapDelete("/api/brewery/{id:guid}", Delete).RequireAuthorization("read:pijze", "admin");
+        var group = app.MapGroup("/api/brewery");
+        
+        group.RequireAuthorization("read:pijze", "admin");
+        
+        group.MapGet("/{id:guid}", Get);
+        group.MapGet("/", GetAll);
+        group.MapPost("/", Create);
+        group.MapPost("/{id:guid}", Update);
+        group.MapDelete("/{id:guid}", Delete);
     }
     
-    async Task<IResult> Get(Guid id, IQueryDispatcher dispatcher)
+    internal async Task<Results<Ok<BreweryDto>,NotFound>> Get(Guid id, IQueryDispatcher dispatcher)
     {
-        var beer = await dispatcher.QueryAsync(new FindBrewery(id));
-        return beer is null ? Results.NotFound() : Results.Ok(beer);
+        var brewery = await dispatcher.QueryAsync(new FindBrewery(id));
+        return brewery is null ?  TypedResults.NotFound() : TypedResults.Ok(brewery);
     }  
 
-    async Task<IResult> GetAll(IQueryDispatcher dispatcher)
+    internal async Task<Ok<IEnumerable<BreweryDto>>> GetAll(IQueryDispatcher dispatcher)
     {
-        return Results.Ok(await dispatcher.QueryAsync(new GetBreweries()));
+        return TypedResults.Ok(await dispatcher.QueryAsync(new GetBreweries()));
     }
 
-    async Task<IResult> Post(AddBrewery command, ICommandDispatcher dispatcher)
+    internal async Task<Results<Ok,BadRequest<string>>> Create(AddBrewery command, ICommandDispatcher dispatcher)
     {
         await dispatcher.SendAsync(command);
-        return Results.Ok();
+        return TypedResults.Ok();
     }
 
-    async Task<IResult> Update(Guid id, UpdateBrewery command, ICommandDispatcher dispatcher)
+    internal async Task<NoContent> Update(Guid id, UpdateBrewery command, ICommandDispatcher dispatcher)
     {
         await dispatcher.SendAsync(command with {Id = id});
-        return Results.NoContent();
+        return TypedResults.NoContent();
     }
 
-    async Task<IResult> Delete(Guid id, ICommandDispatcher dispatcher)
+    internal async Task<NoContent> Delete(Guid id, ICommandDispatcher dispatcher)
     {
         await dispatcher.SendAsync(new DeleteBrewery(id));
-        return Results.NoContent();
+        return TypedResults.NoContent();
     }
 }

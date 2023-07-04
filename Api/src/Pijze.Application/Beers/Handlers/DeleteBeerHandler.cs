@@ -17,7 +17,7 @@ internal class DeleteBeerHandler : ICommandHandler<DeleteBeer>
     public async Task HandleAsync(DeleteBeer command)
     {
         var beer = await _beerRepository.Find(command.Id);
-        if(beer == null) throw new BeerNotFoundException($"Beer with id {command.Id} was not found.");;
+        if(beer == null) throw new BeerNotFoundException(command.Id);
         _beerRepository.Delete(beer);
     }
 }

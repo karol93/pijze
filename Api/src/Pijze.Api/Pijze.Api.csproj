@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Pijze.Api.Tests" />
+    <InternalsVisibleTo Include="Pijze.Api.UnitTests" />
   </ItemGroup>
 
 
