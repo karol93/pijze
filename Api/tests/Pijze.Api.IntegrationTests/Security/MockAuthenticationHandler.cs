@@ -1,11 +1,10 @@
 ﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Pijze.Api.Tests.Security;
+namespace Pijze.Api.IntegrationTests.Security;
 
 internal class MockAuthenticationHandler: AuthenticationHandler<AuthenticationSchemeOptions>
 {
@@ -21,7 +20,7 @@ internal class MockAuthenticationHandler: AuthenticationHandler<AuthenticationSc
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        var identity = new ClaimsIdentity(new []{ new Claim("scope","read:pijze")}, "Test");
+        var identity = new ClaimsIdentity(new []{ new Claim("scope","read:pijze"),new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role","Admin")}, "Test");
         var principal = new ClaimsPrincipal(identity);
         var ticket = new AuthenticationTicket(principal, "Test");
 

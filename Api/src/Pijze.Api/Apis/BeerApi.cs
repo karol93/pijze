@@ -44,13 +44,13 @@ internal class BeerApi : IApi
         return TypedResults.Ok();
     }
 
-    internal async Task<NoContent> Update(Guid id, UpdateBeer command, ICommandDispatcher dispatcher)
+    internal async Task<Results<NoContent, BadRequest<string>>> Update(Guid id, UpdateBeer command, ICommandDispatcher dispatcher)
     {
         await dispatcher.SendAsync(command with {Id = id});
         return TypedResults.NoContent();
     }
 
-    internal async Task<NoContent> Delete(Guid id, ICommandDispatcher dispatcher)
+    internal async Task<Results<NoContent, BadRequest<string>>> Delete(Guid id, ICommandDispatcher dispatcher)
     {
         await dispatcher.SendAsync(new DeleteBeer(id));
         return TypedResults.NoContent();

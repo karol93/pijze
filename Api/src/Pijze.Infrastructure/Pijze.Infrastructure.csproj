@@ -31,4 +31,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Pijze.Api.Tests" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Pijze.Api.IntegrationTests" />
+  </ItemGroup>
 </Project>
