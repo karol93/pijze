@@ -25,4 +25,4 @@ jobs:
       run: dotnet restore
       
     - name: Test
-      run: dotnet test --verbosity normal
+      run: dotnet test --no-restore --verbosity normal
