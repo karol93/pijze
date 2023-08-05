@@ -159,7 +159,8 @@ public class BeerApiTests
         
         var response = await httpClient.PostAsync($"api/beer", new StringContent(JsonSerializer.Serialize(command),
             Encoding.UTF8, "application/json"));
-        
+
+        (await response.Content.ReadAsStringAsync()).Should().Be("tt");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
     
