@@ -31,3 +31,9 @@ jobs:
       run: |
         docker build -t karol93/pijze-api:latest -f ./Api/src/Pijze.Api/Dockerfile .
         docker push karol93/pijze-api:latest
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: /testresults
