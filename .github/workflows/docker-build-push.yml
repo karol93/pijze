@@ -22,7 +22,12 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and Push Docker Image
+    - name: Build and Push PijzeBff Docker Image
       run: |
         docker build -t karol93/pijze-bff:latest -f ./Bff/Pijze.Bff/Dockerfile .
         docker push karol93/pijze-bff:latest
+
+    - name: Build and Push PijzeApi Docker Image
+      run: |
+        docker build -t karol93/pijze-api:latest -f ./Api/Pijze.Api/Dockerfile .
+        docker push karol93/pijze-api:latest
