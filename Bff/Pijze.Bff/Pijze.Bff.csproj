@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>b189ff4a-723b-4985-95a5-680cc572dee6</UserSecretsId>
         <LangVersion>default</LangVersion>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,6 +24,9 @@
 
     <ItemGroup>
         <Content Remove="ClientApp\**" />
+        <Content Include="..\..\.dockerignore">
+          <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
     
     <ItemGroup>

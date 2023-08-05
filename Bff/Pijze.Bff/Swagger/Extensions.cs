@@ -2,6 +2,7 @@
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Readers;
+using Pijze.Bff.Helpers;
 using Yarp.ReverseProxy.Configuration;
 
 namespace Pijze.Bff.Swagger;
@@ -52,7 +53,8 @@ internal static class Extensions
     {
         endpoints.Map("/swagger/services/1.0/swagger.json", async context =>
         {
-            var bffSwaggerStream = await swaggerHttpClient.GetSwaggerJsonStream($"{context.Request.Scheme}://{context.Request.Host}");
+            var urlProvider = new UrlProvider(context.Request);
+            var bffSwaggerStream = await swaggerHttpClient.GetSwaggerJsonStream($"{urlProvider.GetBaseUrl()}");
             var bffSwaggerDocument = new OpenApiStreamReader().Read(bffSwaggerStream, out var diagnostic);
             bffSwaggerDocument.Paths.Clear();
         

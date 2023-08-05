@@ -1,0 +1,29 @@
+﻿services:
+  pijzeBff:
+    image: pijze.bff
+    build:
+      context: .
+      dockerfile: Bff/Pijze.Bff/Dockerfile
+    ports:
+      - 5100:80
+      - 9100:443
+    environment:
+      - "HTTP_API_BASE_URL=http://pijzebff"
+      - "HTTPS_API_BASE_URL=https://pijzebff"
+      - "ReverseProxy__Clusters__pijzeApi__Destinations__pijzeApi/destination1__Address=http://pijzeApi/"
+      - "Auth0__Domain=${AUTH0_DOMAIN}"
+      - "Auth0__ClientId=${AUTH0_CLIENT_ID}"
+      - "Auth0__ClientSecret=${AUTH0_CLIENT_SECRET}"
+      - "Auth0__ApiAudience=${AUTH0_API_AUDIENCE}"
+
+  pijzeApi:
+    image: pijze.api
+    build:
+      context: .
+      dockerfile: Api/src/Pijze.Api/Dockerfile
+    ports:
+      - 5101:80
+      - 9101:443
+    environment:
+      - "JwtConfig__Audience=${JWT_AUDIENCE}"
+      - "JwtConfig__Issuer=${JWT_ISSUER}"

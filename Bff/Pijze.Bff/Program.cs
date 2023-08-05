@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddHealthChecks();
 builder.Services
     .AddSwagger(builder.Configuration)
     .AddAuthentication(builder.Configuration)
@@ -16,6 +17,7 @@ builder.Services
 
 var app = builder.Build();
 
+app.MapHealthChecks("/health");
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
