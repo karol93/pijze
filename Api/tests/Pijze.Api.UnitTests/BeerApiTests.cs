@@ -136,16 +136,16 @@ public class BeerApiTests
 
         var result = await _beerApi.Update(guid, command, _commandDispatcher.Object);
 
-        var typedResult = result.Should().BeOfType<NoContent>().Subject;
+        var typedResult = result.Result.Should().BeOfType<NoContent>().Subject;
         typedResult.StatusCode.Should().Be(StatusCodes.Status204NoContent);
     }
     
     [Fact]
-    public async Task Update_ReturnNoContent_WhenBeerWasDeleted()
+    public async Task Delete_ReturnNoContent_WhenBeerWasDeleted()
     {
         var result = await _beerApi.Delete(Guid.NewGuid(), _commandDispatcher.Object);
 
-        var typedResult = result.Should().BeOfType<NoContent>().Subject;
+        var typedResult = result.Result.Should().BeOfType<NoContent>().Subject;
         typedResult.StatusCode.Should().Be(StatusCodes.Status204NoContent);
     }
 }
