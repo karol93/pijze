@@ -29,5 +29,5 @@ jobs:
 
     - name: Build and Push PijzeApi Docker Image
       run: |
-        docker build -t karol93/pijze-api:latest -f ./Api/Pijze.Api/Dockerfile .
+        docker build -t karol93/pijze-api:latest -f ./Api/src/Pijze.Api/Dockerfile .
         docker push karol93/pijze-api:latest
