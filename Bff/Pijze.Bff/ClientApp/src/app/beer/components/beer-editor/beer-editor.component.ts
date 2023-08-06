@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Beer } from '../../models';
 
@@ -19,12 +19,12 @@ import { Beer } from '../../models';
 })
 export class BeerEditorComponent implements OnInit {
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private changeDetectorRef: ChangeDetectorRef,
     private _snackBar: MatSnackBar
   ) {}
 
-  beerForm!: FormGroup;
+  beerForm!: UntypedFormGroup;
   imageSrc: string = '';
 
   @Output() beerSave = new EventEmitter<Beer>();
