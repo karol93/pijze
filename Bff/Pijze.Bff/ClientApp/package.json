@@ -24,7 +24,7 @@
     "@ngrx/store": "^15.3.0",
     "@ngrx/store-devtools": "^15.3.0",
     "ng-lazyload-image": "^9.1.2",
-    "ngx-spinner": "^14.0.0",
+    "ngx-spinner": "^15.0.1",
     "rxjs": "^7.8.1",
     "save": "^2.4.0",
     "tslib": "^2.3.0",
