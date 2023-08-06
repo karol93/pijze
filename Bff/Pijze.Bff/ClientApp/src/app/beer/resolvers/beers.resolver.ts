@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, first, tap } from 'rxjs';
 import { SpinnerService } from 'src/app/core';
@@ -13,7 +9,7 @@ import { getBeers } from '../store/selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class BeersResolver implements Resolve<any> {
+export class BeersResolver  {
   constructor(
     private spinner: SpinnerService,
     private store: Store<BeerState>

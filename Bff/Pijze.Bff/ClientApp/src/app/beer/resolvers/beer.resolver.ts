@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { tap } from 'rxjs';
 import { SpinnerService } from 'src/app/core';
 import { BeerService } from '../services';
@@ -11,7 +7,7 @@ import { BeerService } from '../services';
 @Injectable({
   providedIn: 'root',
 })
-export class BeerResolver implements Resolve<any> {
+export class BeerResolver  {
   constructor(
     private beerService: BeerService,
     private spinner: SpinnerService
