@@ -1,10 +1,5 @@
-<div
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="50px"
-  [formGroup]="filtersForm"
->
-  <mat-form-field appearance="outline" fxFlex="20">
+<div [formGroup]="filtersForm" class="filters-container">
+  <mat-form-field appearance="outline" class="search-input">
     <mat-icon matPrefix color="primary">search</mat-icon>
     <input matInput formControlName="text" />
   </mat-form-field>

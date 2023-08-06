@@ -7,7 +7,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -33,7 +32,6 @@ export abstract class EnsureImportedOnceModule {
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    FlexLayoutModule,
     MatButtonModule,
     RouterModule,
     LazyLoadImageModule,
