@@ -1,5 +1,5 @@
 <ng-container *ngIf="beers.length">
-  <div
+  <!-- <div
     *ngFor="let beersChunk of beers | chunk : 4"
     class="beer-list-row-container"
   >
@@ -7,6 +7,14 @@
       (click)="onBeerClick(beer.id)"
       class="beer-card"
       *ngFor="let beer of beersChunk"
+      [beer]="beer"
+    ></beer-list-item>
+  </div> -->
+  <div class="grid grid-cols-4 gap-8 m-8">
+    <beer-list-item
+      (click)="onBeerClick(beer.id)"
+      class="beer-card"
+      *ngFor="let beer of beers"
       [beer]="beer"
     ></beer-list-item>
   </div>

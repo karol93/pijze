@@ -1,30 +1,89 @@
-<mat-card id="beer-editor-card">
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
   <img
+    class="cursor-pointer"
     *ngIf="imageSrc"
     mat-card-image
     [src]="'data:image/jpeg;base64,' + imageSrc"
     alt="beer-image"
+    (click)="fileInput.click()"
   />
   <img
+    class="cursor-pointer"
     *ngIf="!imageSrc"
     mat-card-image
     [src]="'/assets/600x800.png'"
     alt="beer-image"
+    (click)="fileInput.click()"
   />
-  <mat-card-content>
+  <div class="flex flex-col p-5">
     <form [formGroup]="beerForm" (ngSubmit)="onSubmit()" novalidate>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Manufacturer</mat-label>
-        <input matInput type="text" formControlName="manufacturer" />
-      </mat-form-field>
-      <rating formControlName="rating"></rating>
-      <button type="button" mat-raised-button (click)="fileInput.click()">
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+          formControlName="name"
+          type="text"
+          name="name"
+          id="name"
+          placeholder=" "
+          [ngClass]="{
+            'border-red-600':
+              beerForm.controls['name'].invalid &&
+              (beerForm.controls['name'].dirty ||
+                beerForm.controls['name'].touched)
+          }"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        />
+        <label
+          for="name"
+          [ngClass]="{
+            'text-red-600':
+              beerForm.controls['name'].invalid &&
+              (beerForm.controls['name'].dirty ||
+                beerForm.controls['name'].touched)
+          }"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Name*</label
+        >
+      </div>
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+          [ngClass]="{
+            'border-red-600':
+              beerForm.controls['manufacturer'].invalid &&
+              (beerForm.controls['manufacturer'].dirty ||
+                beerForm.controls['manufacturer'].touched)
+          }"
+          formControlName="manufacturer"
+          type="text"
+          name="manufacturer"
+          id="manufacturer"
+          placeholder=" "
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        />
+        <label
+          [ngClass]="{
+            'text-red-600':
+              beerForm.controls['manufacturer'].invalid &&
+              (beerForm.controls['manufacturer'].dirty ||
+                beerForm.controls['manufacturer'].touched)
+          }"
+          for="manufacturer"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Manufacturer*</label
+        >
+      </div>
+
+      <div class="mb-6">
+        <rating formControlName="rating"></rating>
+      </div>
+
+      <!-- <button
+        (click)="fileInput.click()"
+        type="button"
+        class="mb-6 w-full rounded-none text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+      >
         Upload photo
-      </button>
+      </button> -->
+
       <input
         hidden
         (change)="onFileSelected()"
@@ -32,19 +91,23 @@
         type="file"
         id="file"
       />
-      <div class="button">
-        <button type="submit" mat-stroked-button color="primary">Save</button>
-      </div>
-      <div class="button" *ngIf="beer?.id">
+
+      <button
+        type="submit"
+        class="w-full rounded-none text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+      >
+        Save
+      </button>
+
+      <div *ngIf="beer?.id">
         <button
           type="button"
-          mat-stroked-button
-          color="warn"
           (click)="onDelete()"
+          class="w-full rounded-none text-red-700 hover:text-white border border-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         >
           Delete
         </button>
       </div>
     </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -3,13 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppHeaderComponent } from './app-header';
 import { CacheInterceptor } from './interceptors';
@@ -25,18 +19,7 @@ export abstract class EnsureImportedOnceModule {
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    RouterModule,
-    LazyLoadImageModule,
-    MatSnackBarModule,
-  ],
+  imports: [CommonModule, HttpClientModule, RouterModule, LazyLoadImageModule],
   declarations: [AppHeaderComponent],
   exports: [AppHeaderComponent],
   providers: [

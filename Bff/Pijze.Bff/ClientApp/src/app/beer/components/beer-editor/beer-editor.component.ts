@@ -7,8 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Beer } from '../../models';
 
 @Component({
@@ -19,12 +18,11 @@ import { Beer } from '../../models';
 })
 export class BeerEditorComponent implements OnInit {
   constructor(
-    private formBuilder: UntypedFormBuilder,
-    private changeDetectorRef: ChangeDetectorRef,
-    private _snackBar: MatSnackBar
+    private formBuilder: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  beerForm!: UntypedFormGroup;
+  beerForm!: FormGroup;
   imageSrc: string = '';
 
   @Output() beerSave = new EventEmitter<Beer>();
@@ -65,15 +63,12 @@ export class BeerEditorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.beerForm);
     if (this.beerForm.valid) {
       this.beerSave.emit(this.beerForm.value);
     } else {
       this.beerForm.markAllAsTouched();
       if (this.beerForm.controls['photo'].invalid) {
-        this._snackBar.open('The photo of beer is required', '', {
-          duration: 5000,
-        });
+        alert('The photo of beer is required');
       }
     }
   }

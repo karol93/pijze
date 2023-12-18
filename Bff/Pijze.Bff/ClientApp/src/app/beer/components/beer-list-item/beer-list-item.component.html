@@ -1,12 +1,10 @@
-<mat-card>
-  <div class="image-container">
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+  <div class="image-container cursor-pointer">
     <beer-image [beerId]="beer.id"></beer-image>
   </div>
-  <mat-card-content>
-    <div class="beer-content">
-      <rating [rating]="beer.rating" [readOnly]="true"></rating>
-      <h3 class="beer-manufacturer">{{ beer.manufacturer }}</h3>
-      <div class="beer-name">{{ beer.name }}</div>
-    </div>
-  </mat-card-content>
-</mat-card>
+  <div class="flex flex-col items-center p-5">
+    <rating [rating]="beer.rating" [readOnly]="true" class="m-1"></rating>
+    <p class="font-light text-sm text-slate-500 m-1">{{ beer.manufacturer }}</p>
+    <p class="font-bold text-lg m-1">{{ beer.name }}</p>
+  </div>
+</div>

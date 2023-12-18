@@ -7,7 +7,7 @@ import { BeerService } from '../services';
 @Injectable({
   providedIn: 'root',
 })
-export class BeerResolver  {
+export class BeerResolver {
   constructor(
     private beerService: BeerService,
     private spinner: SpinnerService
