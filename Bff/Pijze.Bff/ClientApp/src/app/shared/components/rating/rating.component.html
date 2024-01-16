@@ -1,3 +1,9 @@
+<label
+  *ngIf="displayLabel"
+  for="rating"
+  class="block mb-2 text-sm text-gray-500"
+  >Rating*</label
+>
 <i
   [class]="
     (rating && rating >= i + 1) || hoverRating >= i + 1

@@ -27,6 +27,7 @@ export class RatingComponent implements ControlValueAccessor {
   hoverRating = 0;
   @Input() rating: number | null = null;
   @Input() readOnly = false;
+  @Input() displayLabel = false;
 
   onChange = (rating: number | null) => {};
   onTouched = () => {};

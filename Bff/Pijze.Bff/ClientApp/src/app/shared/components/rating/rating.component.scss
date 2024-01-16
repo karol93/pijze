@@ -3,3 +3,9 @@
     color: rgb(220 38 38);
   }
 }
+
+:host.ng-touched.ng-invalid:hover {
+  .fa-star {
+    color: rgb(250 204 21);
+  }
+}

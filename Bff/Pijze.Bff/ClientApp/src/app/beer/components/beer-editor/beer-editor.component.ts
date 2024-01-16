@@ -67,6 +67,8 @@ export class BeerEditorComponent implements OnInit {
       this.beerSave.emit(this.beerForm.value);
     } else {
       this.beerForm.markAllAsTouched();
+      this.beerForm.controls['name'].markAsDirty();
+      this.beerForm.controls['name'].updateValueAndValidity();
       if (this.beerForm.controls['photo'].invalid) {
         alert('The photo of beer is required');
       }
