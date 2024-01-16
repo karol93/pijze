@@ -8,7 +8,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Beer } from '../../models';
 
 @Component({
@@ -20,8 +19,7 @@ import { Beer } from '../../models';
 export class BeerEditorComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef,
-    private _snackBar: MatSnackBar
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   beerForm!: FormGroup;
@@ -65,15 +63,14 @@ export class BeerEditorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.beerForm);
     if (this.beerForm.valid) {
       this.beerSave.emit(this.beerForm.value);
     } else {
       this.beerForm.markAllAsTouched();
+      this.beerForm.controls['name'].markAsDirty();
+      this.beerForm.controls['name'].updateValueAndValidity();
       if (this.beerForm.controls['photo'].invalid) {
-        this._snackBar.open('The photo of beer is required', '', {
-          duration: 5000,
-        });
+        alert('The photo of beer is required');
       }
     }
   }

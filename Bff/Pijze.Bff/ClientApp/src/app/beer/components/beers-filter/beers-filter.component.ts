@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BeerFilters } from '../../models';
 
@@ -19,11 +19,11 @@ import { BeerFilters } from '../../models';
 export class BeersFilterComponent implements OnInit, OnDestroy {
   private formSubscription?: Subscription;
 
-  filtersForm!: FormGroup;
+  filtersForm!: UntypedFormGroup;
 
   @Output() beersFilter = new EventEmitter<BeerFilters | null>();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.filtersForm = this.formBuilder.group({

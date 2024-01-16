@@ -31,9 +31,12 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+              "node_modules/@fortawesome/fontawesome-free/css/brands.css",
+              "node_modules/@fortawesome/fontawesome-free/css/solid.css",
+              "node_modules/@fortawesome/fontawesome-free/css/regular.css"
             ],
             "scripts": []
           },
@@ -101,7 +104,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -110,5 +112,7 @@
       }
     }
   },
-  "defaultProject": "PijzeClient"
+  "cli": {
+    "analytics": false
+  }
 }

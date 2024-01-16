@@ -4,7 +4,7 @@ html,
 body,
 material-app,
 mat-sidenav-container {
-  background: #eaeaea;
+  background: #fff;
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -17,3 +17,31 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+  .btn-blue {
+    @apply text-blue-700 hover:text-white border border-blue-700 rounded-none hover:bg-blue-800 font-medium  text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  .btn-red{
+    @apply rounded-none text-red-700 hover:text-white border border-red-700 hover:bg-red-800 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  .floating-input{
+    @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600;
+  }
+
+  .floating-label{
+    @apply peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6
+  }
+
+  input.ng-touched.ng-invalid{
+    @apply border-red-600;
+  }
+
+

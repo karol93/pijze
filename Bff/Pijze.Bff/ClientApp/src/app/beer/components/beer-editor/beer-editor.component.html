@@ -1,50 +1,57 @@
-<mat-card id="beer-editor-card">
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
   <img
-    *ngIf="imageSrc"
-    mat-card-image
-    [src]="'data:image/jpeg;base64,' + imageSrc"
+    class="cursor-pointer"
+    [src]="
+      imageSrc ? 'data:image/jpeg;base64,' + imageSrc : '/assets/600x800.png'
+    "
     alt="beer-image"
+    (click)="fileInput.click()"
   />
-  <img
-    *ngIf="!imageSrc"
-    mat-card-image
-    [src]="'/assets/600x800.png'"
-    alt="beer-image"
-  />
-  <mat-card-content>
+  <div class="flex flex-col p-5">
     <form [formGroup]="beerForm" (ngSubmit)="onSubmit()" novalidate>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Manufacturer</mat-label>
-        <input matInput type="text" formControlName="manufacturer" />
-      </mat-form-field>
-      <rating formControlName="rating"></rating>
-      <button type="button" mat-raised-button (click)="fileInput.click()">
-        Upload photo
-      </button>
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+          formControlName="name"
+          type="text"
+          name="name"
+          id="name"
+          placeholder=" "
+          class="floating-input peer"
+        />
+        <label for="name" class="floating-label">Name*</label>
+      </div>
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+          formControlName="manufacturer"
+          type="text"
+          name="manufacturer"
+          id="manufacturer"
+          placeholder=" "
+          class="floating-input peer"
+        />
+        <label for="manufacturer" class="floating-label">Manufacturer*</label>
+      </div>
+
+      <div class="mb-6">
+        <rating formControlName="rating" [displayLabel]="true"></rating>
+      </div>
+
       <input
         hidden
         (change)="onFileSelected()"
         #fileInput
+        accept=".jpg, .png"
         type="file"
         id="file"
       />
-      <div class="button">
-        <button type="submit" mat-stroked-button color="primary">Save</button>
-      </div>
-      <div class="button" *ngIf="beer?.id">
-        <button
-          type="button"
-          mat-stroked-button
-          color="warn"
-          (click)="onDelete()"
-        >
+
+      <button type="submit" class="btn-blue w-full">Save</button>
+
+      <div *ngIf="beer?.id">
+        <button type="button" (click)="onDelete()" class="btn-red w-full">
           Delete
         </button>
       </div>
     </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

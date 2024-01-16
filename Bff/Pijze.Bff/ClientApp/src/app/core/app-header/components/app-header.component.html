@@ -1,40 +1,75 @@
-<div style="height: 100%; display: flex; flex-direction: column">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button
-        mat-icon-button
-        (click)="sidenav.toggle()"
-        fxShow="true"
-        fxHide.gt-sm
+<nav class="bg-stone-100 border-b border-stone-200">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <a routerLink="/beer" routerLinkActive="active" class="flex items-center">
+      <img src="/assets/logo.png" class="h-16 mr-3" alt="Flowbite Logo" />
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
       >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <a routerLink="/" mat-button>Pijże</a>
-      <span class="menu-spacer"></span>
-      <div fxShow="true" fxHide.lt-md *ngIf="isAuthenticated$ | async">
-        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <a routerLink="/beer/add" routerLinkActive="active" mat-button
-          >Add beer</a
-        >
-        <a mat-button (click)="logout()">Logout</a>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav>
-      <mat-nav-list>
-        <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-        <ng-container *ngIf="isAuthenticated$ | async">
-          <a routerLink="/beer/add" routerLinkActive="active" mat-button
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul
+        class="text-sm font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-stone-100"
+      >
+        <li>
+          <a
+            href="#"
+            routerLink="/beer"
+            routerLinkActive="md:text-blue-700"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="block py-2 pl-3 pr-4 text-gray-900 bg-blue-700 rounded md:bg-transparent md:hover:text-blue-700 md:p-0"
+            >Beers</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            routerLink="/breweries"
+            routerLinkActive="md:text-blue-700"
+            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+            >Breweries</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            routerLink="/beer/add"
+            routerLinkActive="md:text-blue-700"
+            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >Add beer</a
           >
-          <a mat-button (click)="logout()">Logout</a>
-        </ng-container>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content fxFlexFill>
-      <ng-content></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+        </li>
+        <li>
+          <a
+            (click)="logout()"
+            href="#"
+            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

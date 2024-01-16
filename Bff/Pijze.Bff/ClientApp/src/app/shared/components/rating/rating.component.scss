@@ -1,9 +1,11 @@
-.mat-icon {
-  color: #e6d834;
+:host.ng-touched.ng-invalid {
+  .fa-star {
+    color: rgb(220 38 38);
+  }
 }
 
-:host.ng-touched.ng-invalid {
-  .mat-icon {
-    color: #f44336;
+:host.ng-touched.ng-invalid:hover {
+  .fa-star {
+    color: rgb(250 204 21);
   }
 }

@@ -2,13 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -30,17 +23,9 @@ import { BeerEffects, beerReducer } from './store';
     EffectsModule.forFeature([BeerEffects]),
     BeerRoutingModule,
     SharedModule,
-    MatCardModule,
     CommonModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatIconModule,
-    MatSnackBarModule,
   ],
   declarations: [
     BeerListComponent,

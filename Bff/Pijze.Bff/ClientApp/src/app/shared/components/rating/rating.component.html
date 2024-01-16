@@ -1,10 +1,18 @@
-<mat-icon
+<label
+  *ngIf="displayLabel"
+  for="rating"
+  class="block mb-2 text-sm text-gray-500"
+  >Rating*</label
+>
+<i
+  [class]="
+    (rating && rating >= i + 1) || hoverRating >= i + 1
+      ? 'fa-solid fa-star text-yellow-400 hover:text-yellow-400'
+      : 'fa-regular fa-star text-yellow-400 hover:text-yellow-400'
+  "
   *ngFor="let i of maxRating | numberToArray"
   (click)="onClick(i + 1)"
   (mouseenter)="onStartHover(i + 1)"
   (mouseleave)="onStopHover()"
 >
-  {{
-    (rating && rating >= i + 1) || hoverRating >= i + 1 ? "star" : "star_border"
-  }}
-</mat-icon>
+</i>
