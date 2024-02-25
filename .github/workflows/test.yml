@@ -16,4 +16,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Print Secret
-      run: echo "My Secret: ${{ secrets.MY_SECRET }}"
+      run: |
+        echo "My Secret: ${{ secrets.DOCKERHUB_TOKEN }}"
+
