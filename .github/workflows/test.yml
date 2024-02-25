@@ -17,5 +17,5 @@ jobs:
 
     - name: Print Secret
       run: |
-        echo "My Secret: ${{ env.Greeting }}"
+        echo "My Secret: ${{ env.GREETING }}"
 
