@@ -17,5 +17,5 @@ jobs:
 
     - name: Print Secret
       run: |
-        echo "My Secret: ${{ secrets.DOCKERHUB_TOKEN }}"
+        echo "My Secret: ${{ env.Greeting }}"
 
