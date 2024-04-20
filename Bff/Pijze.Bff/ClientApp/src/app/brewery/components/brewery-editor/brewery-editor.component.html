@@ -1,0 +1,24 @@
+<div class="flex items-center justify-center mt-40">
+  <div class="card">
+    <form
+      class="p-5"
+      [formGroup]="breweryForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <div class="relative z-0 w-full mb-6 group">
+        <input
+          formControlName="name"
+          type="text"
+          name="name"
+          id="name"
+          placeholder=" "
+          class="floating-input peer"
+        />
+        <label for="name" class="floating-label">Name*</label>
+      </div>
+
+      <button type="submit" class="btn-blue w-full">Save</button>
+    </form>
+  </div>
+</div>

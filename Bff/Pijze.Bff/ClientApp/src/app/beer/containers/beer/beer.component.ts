@@ -1,38 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Beer } from '../../models';
-import { BeerService } from '../../services';
+import { BeerActions, BeerState } from '../../store';
+import { Store } from '@ngrx/store';
+import {
+  getBreweries,
+  getSelected,
+  isDataLoading,
+} from '../../store/selectors';
+import { Beer, Brewery } from 'src/app/core';
 
 @Component({
   selector: 'beer',
   templateUrl: './beer.component.html',
-  styleUrls: ['./beer.component.scss'],
 })
-export class BeerComponent implements OnInit {
-  id?: string;
-  beer?: Beer;
+export class BeerComponent {
+  beer$: Observable<Beer | null>;
+  breweries$: Observable<ReadonlyArray<Brewery>>;
+  isDataLoading$: Observable<boolean>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private beerService: BeerService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.route.data.subscribe((data: any) => (this.beer = data.beer));
+  constructor(private store: Store<BeerState>) {
+    this.isDataLoading$ = this.store.select(isDataLoading);
+    this.beer$ = this.store.select(getSelected);
+    this.breweries$ = this.store.select(getBreweries);
   }
 
-  onBeerSave(beer: Beer): void {
-    let save$: Observable<void> = beer.id
-      ? this.beerService.update(beer)
-      : this.beerService.create(beer);
-    save$.subscribe((_) => this.router.navigate(['/']));
+  protected onBeerSave(beer: Beer): void {
+    beer.id
+      ? this.store.dispatch(BeerActions.updateBeer({ beer }))
+      : this.store.dispatch(BeerActions.addBeer({ beer }));
   }
 
-  onBeerDelete(beer: Beer): void {
-    this.beerService
-      .delete(beer.id)
-      .subscribe((_) => this.router.navigate(['/']));
+  protected onBeerDelete(beer: Beer): void {
+    this.store.dispatch(BeerActions.deleteBeer({ beerId: beer.id! }));
   }
 }

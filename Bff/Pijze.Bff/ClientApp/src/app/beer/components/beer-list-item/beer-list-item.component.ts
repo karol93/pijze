@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { BeerListItem } from '../../models';
+import { BeerListItem } from 'src/app/core';
 
 @Component({
   selector: 'beer-list-item',

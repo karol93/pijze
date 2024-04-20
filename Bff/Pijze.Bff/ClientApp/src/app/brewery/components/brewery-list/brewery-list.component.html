@@ -1,0 +1,36 @@
+<div *ngIf="pagination" class="m-8">
+  <paginator
+    [pagination]="pagination"
+    (pageChanged)="onPageChange($event)"
+  ></paginator>
+</div>
+
+<table
+  class="table-fixed border-collapse border border-slate-400 border-spacing-6 m-8 w-full"
+>
+  <thead>
+    <tr>
+      <th class="border border-slate-300 p-3 w-3/4">Name</th>
+      <th class="border border-slate-300 p-3 w-1/4">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brewery of breweries">
+      <td class="border border-slate-300 p-3 w-3/4">
+        {{ brewery.name }}
+      </td>
+      <td class="border border-slate-300 p-3 w-1/4 text-center">
+        <i
+          [routerLink]="['/brewery/edit', brewery.id]"
+          class="fa fa-eye cursor-pointer text-blue-700 transform hover:scale-125 transition-transform duration-100"
+          title="Edit"
+        ></i>
+        <i
+          (click)="onBreweryDeleteActionClicked(brewery.id!)"
+          class="ml-4 fa fa-trash cursor-pointer text-red-700 transform hover:scale-125 transition-transform duration-100"
+          title="Remove"
+        ></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

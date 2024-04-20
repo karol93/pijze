@@ -8,7 +8,7 @@ namespace Pijze.Infrastructure.Queries.Beers;
 internal class GetBeersHandler : IQueryHandler<GetBeers, IEnumerable<BeerListItemDto>>
 {
     private readonly IDbExecutorFactory _dbExecutorFactory;
-
+    
     public GetBeersHandler(IDbExecutorFactory dbExecutorFactory)
     {
         _dbExecutorFactory = dbExecutorFactory;
@@ -18,8 +18,9 @@ internal class GetBeersHandler : IQueryHandler<GetBeers, IEnumerable<BeerListIte
     {
         using var db = await _dbExecutorFactory.CreateExecutor();
         var beers = await db.Query<BeerListItemDto>(
-            @"SELECT beer.Id, brewery.Name as Manufacturer, beer.Name, beer.Rating FROM Beers beer
-                 JOIN Breweries brewery on brewery.Id = beer.BreweryId");
+            @"SELECT beer.Id, brewery.Name as Brewery, beer.Name, beer.Rating FROM Beers beer
+                 JOIN Breweries brewery on brewery.Id = beer.BreweryId
+                 ORDER BY beer.CreationDate desc");
         return beers;
     }
 }

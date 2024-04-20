@@ -5,7 +5,7 @@ using Pijze.Domain.Repositories;
 
 namespace Pijze.Application.Breweries.Handlers;
 
-internal class AddBreweryHandler : ICommandHandler<AddBrewery>
+internal class AddBreweryHandler : ICommandHandler<AddBrewery,Guid>
 {
     private readonly IBreweryRepository _breweryRepository;
 
@@ -14,9 +14,10 @@ internal class AddBreweryHandler : ICommandHandler<AddBrewery>
         _breweryRepository = breweryRepository;
     }
 
-    public Task HandleAsync(AddBrewery command)
+    public Task<Guid> HandleAsync(AddBrewery command)
     {
-        _breweryRepository.Add(Brewery.Create(Guid.NewGuid(), command.Name));
-        return Task.CompletedTask;
+        var id = Guid.NewGuid();
+        _breweryRepository.Add(Brewery.Create(id, command.Name));
+        return Task.FromResult(id);
     }
 }

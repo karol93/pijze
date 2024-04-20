@@ -1,6 +1,6 @@
 export interface BeerListItem {
   id: string;
-  manufacturer: string;
+  brewery: string;
   name: string;
   rating: number;
 }

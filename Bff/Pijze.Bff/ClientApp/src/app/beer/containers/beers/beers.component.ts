@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { BeerFilters, BeerListItem } from '../../models';
+import { BeerFilters } from '../../models';
 import { BeerActions, BeerState } from '../../store';
 import { getBeers, isDataLoading } from '../../store/selectors';
+import { getFilters } from '../../store/selectors/beer.selectors';
+import { BeerListItem } from 'src/app/core';
 
 @Component({
   selector: 'beers',
@@ -13,6 +15,7 @@ import { getBeers, isDataLoading } from '../../store/selectors';
 })
 export class BeersComponent implements OnInit {
   beers$!: Observable<ReadonlyArray<BeerListItem>>;
+  filters$!: Observable<BeerFilters | null>;
   isDataLoading$!: Observable<boolean>;
   constructor(
     private router: Router,
@@ -21,14 +24,14 @@ export class BeersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(BeerActions.loadBeers());
     this.beers$ = this.store.select(getBeers);
+    this.filters$ = this.store.select(getFilters);
     this.isDataLoading$ = this.store.select(isDataLoading);
   }
 
-  onBeerClick = (id: string) =>
+  protected onBeerClick = (id: string) =>
     this.router.navigate(['edit', id], { relativeTo: this.route });
 
-  onBeersFilter = (filters: BeerFilters | null) =>
+  protected onBeersFilter = (filters: BeerFilters | null) =>
     this.store.dispatch(BeerActions.filterBeers({ filters }));
 }

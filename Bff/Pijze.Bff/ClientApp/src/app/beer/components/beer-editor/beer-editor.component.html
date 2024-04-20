@@ -1,14 +1,14 @@
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-  <img
-    class="cursor-pointer"
-    [src]="
-      imageSrc ? 'data:image/jpeg;base64,' + imageSrc : '/assets/600x800.png'
-    "
-    alt="beer-image"
-    (click)="fileInput.click()"
-  />
-  <div class="flex flex-col p-5">
-    <form [formGroup]="beerForm" (ngSubmit)="onSubmit()" novalidate>
+<div class="flex items-center justify-center mt-40">
+  <div class="card">
+    <img
+      class="cursor-pointer"
+      [src]="
+        imageSrc ? 'data:image/jpeg;base64,' + imageSrc : '/assets/600x800.png'
+      "
+      alt="beer-image"
+      (click)="fileInput.click()"
+    />
+    <form class="p-5" [formGroup]="beerForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="relative z-0 w-full mb-6 group">
         <input
           formControlName="name"
@@ -21,15 +21,19 @@
         <label for="name" class="floating-label">Name*</label>
       </div>
       <div class="relative z-0 w-full mb-6 group">
-        <input
-          formControlName="manufacturer"
-          type="text"
-          name="manufacturer"
-          id="manufacturer"
-          placeholder=" "
-          class="floating-input peer"
-        />
-        <label for="manufacturer" class="floating-label">Manufacturer*</label>
+        <label for="underline_select" class="sr-only">Underline select</label>
+        <select
+          formControlName="breweryId"
+          name="breweryId"
+          id="underline_select"
+          class="underline-select peer"
+        >
+          <option value="" disabled selected>Select brewery</option>
+
+          <option *ngFor="let brewery of breweries" value="{{ brewery.id }}">
+            {{ brewery.name }}
+          </option>
+        </select>
       </div>
 
       <div class="mb-6">

@@ -1,0 +1,36 @@
+<div class="flex flex-col items-center">
+  <span class="text-sm text-gray-700 dark:text-gray-400">
+    Showing
+    <span class="font-semibold text-gray-900 dark:text-white">{{
+      pagination.currentPage * pagination.itemsPerPage -
+        (pagination.itemsPerPage - 1)
+    }}</span>
+    to
+    <span class="font-semibold text-gray-900 dark:text-white">{{
+      pagination.currentPage * pagination.itemsPerPage > pagination.totalItems
+        ? pagination.totalItems
+        : pagination.currentPage * pagination.itemsPerPage
+    }}</span>
+    of
+    <span class="font-semibold text-gray-900 dark:text-white">{{
+      pagination.totalItems
+    }}</span>
+    Entries
+  </span>
+  <div class="inline-flex mt-2 xs:mt-0">
+    <button
+      class="btn-blue"
+      [disabled]="isPrevPageButtonDisabled"
+      (click)="onPageChange(pagination.currentPage - 1)"
+    >
+      Prev
+    </button>
+    <button
+      class="btn-blue"
+      [disabled]="isNextPageButtonDisabled"
+      (click)="onPageChange(pagination.currentPage + 1)"
+    >
+      Next
+    </button>
+  </div>
+</div>

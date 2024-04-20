@@ -10,6 +10,11 @@ export const getFilters = createSelector(
   (state: BeerState) => state.filters
 );
 
+export const getBeersLoaded = createSelector(
+  getBeerState,
+  (state: BeerState) => state.beersLoaded
+);
+
 export const isDataLoading = createSelector(
   getBeerState,
   (state: BeerState) => state.isDataLoading
@@ -26,8 +31,22 @@ export const getBeers = createSelector(
       (beer) =>
         (lowerText && lowerText.length
           ? beer.name.toLocaleLowerCase().startsWith(lowerText) ||
-            beer.manufacturer.toLocaleLowerCase().startsWith(lowerText)
+            beer.brewery.toLocaleLowerCase().startsWith(lowerText)
           : true) && (filters.rating ? beer.rating == filters.rating : true)
     );
   }
 );
+
+export const getSelected = createSelector(
+  getBeerState,
+  (state: BeerState) => state.selected
+);
+
+export const getBreweriesLoaded = createSelector(
+  getBeerState,
+  (state: BeerState) => state.breweriesLoaded
+);
+
+export const getBreweries = createSelector(getBeerState, (state: BeerState) => {
+  return state.breweries;
+});

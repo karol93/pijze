@@ -25,12 +25,12 @@ export class BeerService {
     return this.httpClient.get<Array<BeerListItem>>(routes.getAll());
   }
 
-  public create(beer: Beer): Observable<void> {
-    return this.httpClient.post<void>(routes.create(), beer);
+  public create(beer: Beer): Observable<Beer> {
+    return this.httpClient.post<Beer>(routes.create(), beer);
   }
 
   public update(beer: Beer): Observable<void> {
-    return this.httpClient.post<void>(routes.update(beer.id), beer);
+    return this.httpClient.post<void>(routes.update(beer.id!), beer);
   }
 
   public delete(id: string): Observable<void> {

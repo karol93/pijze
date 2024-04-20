@@ -9,13 +9,15 @@ namespace Pijze.Api.Apis;
 
 internal class BreweryApi : IApi
 {
+    private const string GetBreweryRouterName = "GetBrewery";
+    
     public void Register(WebApplication app)
     {
         var group = app.MapGroup("/api/brewery");
         
         group.RequireAuthorization("read:pijze", "admin");
         
-        group.MapGet("/{id:guid}", Get);
+        group.MapGet("/{id:guid}", Get).WithName(GetBreweryRouterName);
         group.MapGet("/", GetAll);
         group.MapPost("/", Create);
         group.MapPost("/{id:guid}", Update);
@@ -33,10 +35,11 @@ internal class BreweryApi : IApi
         return TypedResults.Ok(await dispatcher.QueryAsync(new GetBreweries()));
     }
 
-    internal async Task<Results<Ok,BadRequest<string>>> Create(AddBrewery command, ICommandDispatcher dispatcher)
+    internal async Task<Results<CreatedAtRoute<BreweryDto>,BadRequest<string>>> Create(AddBrewery command, ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
     {
-        await dispatcher.SendAsync(command);
-        return TypedResults.Ok();
+        var id = await commandDispatcher.SendAsync<AddBrewery,Guid>(command);
+        var brewery = await queryDispatcher.QueryAsync(new FindBrewery(id));
+        return TypedResults.CreatedAtRoute(brewery, GetBreweryRouterName, new {id});
     }
 
     internal async Task<NoContent> Update(Guid id, UpdateBrewery command, ICommandDispatcher dispatcher)

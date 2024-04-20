@@ -88,12 +88,21 @@ public class BreweryApiTests
     [Fact]
     public async Task Create_ReturnOk_WhenBreweryWasCreated()
     {
-        var command = new AddBrewery("name");
+        var breweryName = "name";
+        var breweryId = Guid.NewGuid();
+        var command = new AddBrewery(breweryName);
+        var breweryDto = new BreweryDto(breweryId.ToString(), breweryName);
+        _commandDispatcher.Setup(x => x.SendAsync<AddBrewery,Guid>(command))
+            .ReturnsAsync(breweryId);
+        _queryDispatcher.Setup(x => x.QueryAsync(new FindBrewery(breweryId)))
+            .ReturnsAsync(breweryDto);
+        
+        var result = await _breweryApi.Create(command, _commandDispatcher.Object, _queryDispatcher.Object);
 
-        var result = await _breweryApi.Create(command, _commandDispatcher.Object);
-
-        var typedResult = result.Result.Should().BeOfType<Ok>().Subject;
-        typedResult.StatusCode.Should().Be(StatusCodes.Status200OK);
+        var typedResult = result.Result.Should().BeOfType<CreatedAtRoute<BreweryDto>>().Subject;
+        typedResult.StatusCode.Should().Be(StatusCodes.Status201Created);
+        typedResult.Value.Should().NotBeNull();
+        typedResult.Value.Should().Be(breweryDto);
     }
     
     [Fact]

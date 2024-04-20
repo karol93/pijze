@@ -46,8 +46,9 @@
         <li>
           <a
             href="#"
-            routerLink="/breweries"
+            routerLink="/brewery"
             routerLinkActive="md:text-blue-700"
+            [routerLinkActiveOptions]="{ exact: true }"
             class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >Breweries</a
           >
@@ -59,6 +60,15 @@
             routerLinkActive="md:text-blue-700"
             class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
             >Add beer</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            routerLink="/brewery/add"
+            routerLinkActive="md:text-blue-700"
+            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+            >Add brewery</a
           >
         </li>
         <li>

@@ -6,7 +6,6 @@ using Pijze.Application.Beers.Commands;
 using Pijze.Application.Common.Commands;
 using Pijze.Application.Common.Queries;
 using Pijze.Domain.SeedWork;
-using Pijze.Domain.Services;
 using Pijze.Domain.Services.Interfaces;
 using Pijze.Infrastructure.Caching;
 using Pijze.Infrastructure.Commands;
@@ -32,6 +31,9 @@ public static class Extensions
         services.Scan(s => s.FromAssemblyOf<ICommand>()
             .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
             .AsImplementedInterfaces()
+            .WithScopedLifetime()
+            .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<,>)))
+            .AsImplementedInterfaces()
             .WithScopedLifetime());
 
         services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
@@ -41,8 +43,11 @@ public static class Extensions
             .WithScopedLifetime());
 
         services.Decorate(typeof(ICommandHandler<>), typeof(TransactionalCommandHandlerDecorator<>));
+        services.Decorate(typeof(ICommandHandler<,>), typeof(TransactionalCommandHandlerWithResultDecorator<,>));
         services.Decorate(typeof(ICommandHandler<>), typeof(CachingCommandHandlerDecorator<>));
+        services.Decorate(typeof(ICommandHandler<,>), typeof(CachingCommandHandlerWithResultDecorator<,>));
         services.Decorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
+        services.Decorate(typeof(ICommandHandler<,>), typeof(ValidationCommandHandlerWithResultDecorator<,>));
         services.Decorate(typeof(IQueryHandler<,>), typeof(CachingQueryHandlerDecorator<,>));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();

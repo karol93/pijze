@@ -1,6 +1,7 @@
 export interface Beer {
-  id: string;
-  manufacturer: string;
+  id?: string;
+  breweryId: string;
+  brewery?: string;
   name: string;
   rating: number;
   photo: string;

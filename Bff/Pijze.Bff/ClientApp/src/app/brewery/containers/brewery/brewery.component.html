@@ -1,0 +1,6 @@
+<brewery-editor
+  [brewery]="brewery$ | async"
+  (brewerySave)="onBrewerySave($event)"
+></brewery-editor>
+
+<spinner [visible]="(isDataLoading$ | async) || false"></spinner>

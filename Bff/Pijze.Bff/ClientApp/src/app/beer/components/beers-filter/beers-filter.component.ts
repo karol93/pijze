@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BeerFilters } from '../../models';
 
@@ -19,17 +20,20 @@ import { BeerFilters } from '../../models';
 export class BeersFilterComponent implements OnInit, OnDestroy {
   private formSubscription?: Subscription;
 
-  filtersForm!: UntypedFormGroup;
+  protected filtersForm = this.formBuilder.group({
+    text: [''],
+    rating: [null as number | null],
+  });
 
+  @Input() filters!: BeerFilters | null;
   @Output() beersFilter = new EventEmitter<BeerFilters | null>();
 
-  constructor(private formBuilder: UntypedFormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.filtersForm = this.formBuilder.group({
-      text: [''],
-      rating: [''],
-    });
+    if (this.filters) {
+      this.filtersForm.setValue(this.filters);
+    }
     this.formSubscription = this.filtersForm.valueChanges.subscribe(
       (filters) => {
         if (!filters.text && !filters.rating) {
@@ -44,7 +48,7 @@ export class BeersFilterComponent implements OnInit, OnDestroy {
     );
   }
 
-  clearFilters(): void {
+  protected clearFilters(): void {
     this.filtersForm.reset();
   }
 

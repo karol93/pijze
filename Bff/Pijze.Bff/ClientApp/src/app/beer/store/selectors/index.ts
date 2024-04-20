@@ -1,1 +1,8 @@
-export { getBeers, isDataLoading } from './beer.selectors';
+export {
+  getBeers,
+  isDataLoading,
+  getBeersLoaded,
+  getSelected,
+  getBreweriesLoaded,
+  getBreweries,
+} from './beer.selectors';

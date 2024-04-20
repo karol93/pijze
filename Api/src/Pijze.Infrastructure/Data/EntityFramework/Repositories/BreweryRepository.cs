@@ -16,7 +16,7 @@ internal class BreweryRepository : IBreweryRepository
 
     public async Task<bool> Exists(AggregateId id) => await _breweries.AnyAsync(x => x.Id == id);
 
-    public async Task<Brewery?> Find(AggregateId id) => await _breweries.FindAsync(id);
+    public async Task<Brewery?> Find(AggregateId id) => await _breweries.FirstOrDefaultAsync(x => x.Id == id);
 
     public void Add(Brewery brewery) => _breweries.Add(brewery);
 

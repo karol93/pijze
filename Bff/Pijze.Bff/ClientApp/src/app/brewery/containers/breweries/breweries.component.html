@@ -1,0 +1,8 @@
+<brewery-list
+  [breweries]="(breweries$ | async) ?? []"
+  [pagination]="pagination$ | async"
+  (breweryDeleteActionClick)="onBreweryDeletActionClick($event)"
+  (pageChanged)="onPageChange($event)"
+></brewery-list>
+
+<spinner [visible]="(isDataLoading$ | async) || false"></spinner>

@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { BeerListItem } from '../../models';
+import { BeerListItem } from 'src/app/core';
 
 @Component({
   selector: 'beer-list',
@@ -17,7 +17,7 @@ export class BeerListComponent {
   @Input() beers: ReadonlyArray<BeerListItem> = [];
   @Output() beerClick = new EventEmitter<string>();
 
-  onBeerClick(id: string): void {
+  protected onBeerClick(id: string): void {
     this.beerClick.emit(id);
   }
 }

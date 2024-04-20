@@ -30,7 +30,7 @@ namespace Pijze.Infrastructure.Data.EntityFramework.Migrations
                 });
 
             migrationBuilder.Sql(
-                "INSERT INTO Breweries SELECT lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))),2) || '-' || substr('89ab',abs(random()) % 4 + 1, 1) || substr(lower(hex(randomblob(2))),2) || '-' || lower(hex(randomblob(6))), b.BreweryId, strftime('%Y-%m-%d %H.%M.%f','now') FROM (select distinct BreweryId from Beers) b;");
+                "INSERT INTO Breweries SELECT lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))),2) || '-' || substr('89ab',abs(random()) % 4 + 1, 1) || substr(lower(hex(randomblob(2))),2) || '-' || lower(hex(randomblob(6))), b.BreweryId, strftime('%Y-%m-%d %H:%M:%S','now') FROM (select distinct BreweryId from Beers) b;");
 
             migrationBuilder.Sql(
                 "update Beers set BreweryId = (select Id from Breweries where Breweries.Name = Beers.BreweryId);");

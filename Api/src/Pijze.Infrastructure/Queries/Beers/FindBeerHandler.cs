@@ -18,9 +18,8 @@ internal class FindBeerHandler : IQueryHandler<FindBeer, BeerDto?>
     {
         using var db = await _dbExecutorFactory.CreateExecutor();
         var beer = await db.QueryFirstOrDefault<BeerDto>(
-            @"SELECT beer.Id, brewery.Name as Manufacturer, beer.Name, beer.Rating, beer.Image as Photo 
+            @"SELECT beer.Id, beer.BreweryId, beer.Name, beer.Rating, beer.Image as Photo 
                   FROM Beers beer
-                  JOIN Breweries brewery on beer.BreweryId = brewery.Id
                   where beer.Id = @beerId",
             new {beerId = query.Id});
         return beer;

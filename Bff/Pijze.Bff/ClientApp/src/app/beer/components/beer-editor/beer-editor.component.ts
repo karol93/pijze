@@ -7,8 +7,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Beer } from '../../models';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Beer, Brewery } from 'src/app/core';
 
 @Component({
   selector: 'beer-editor',
@@ -18,32 +18,33 @@ import { Beer } from '../../models';
 })
 export class BeerEditorComponent implements OnInit {
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  beerForm!: FormGroup;
-  imageSrc: string = '';
+  protected beerForm = this.formBuilder.group({
+    id: [''],
+    name: ['', Validators.required],
+    breweryId: ['', Validators.required],
+    rating: [null as number | null, Validators.required],
+    photo: ['', Validators.required],
+  });
+
+  protected imageSrc: string = '';
 
   @Output() beerSave = new EventEmitter<Beer>();
   @Output() beerDelete = new EventEmitter<Beer>();
-  @Input() beer?: Beer;
+  @Input() beer?: Beer | null;
+  @Input() breweries?: ReadonlyArray<Brewery>;
 
   ngOnInit(): void {
-    this.beerForm = this.formBuilder.group({
-      id: [''],
-      name: ['', Validators.required],
-      manufacturer: ['', Validators.required],
-      rating: ['', Validators.required],
-      photo: ['', Validators.required],
-    });
     if (this.beer) {
       this.beerForm.patchValue(this.beer);
       this.imageSrc = this.beer.photo;
     }
   }
 
-  onFileSelected(): void {
+  protected onFileSelected(): void {
     const inputNode: any = document.querySelector('#file');
 
     if (typeof FileReader !== 'undefined') {
@@ -62,20 +63,24 @@ export class BeerEditorComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  protected onSubmit(): void {
     if (this.beerForm.valid) {
-      this.beerSave.emit(this.beerForm.value);
+      this.beerSave.emit({
+        id: this.beerForm.value.id,
+        breweryId: this.beerForm.value.breweryId!,
+        name: this.beerForm.value.name!,
+        photo: this.beerForm.value.photo!,
+        rating: this.beerForm.value.rating!,
+      });
     } else {
       this.beerForm.markAllAsTouched();
-      this.beerForm.controls['name'].markAsDirty();
-      this.beerForm.controls['name'].updateValueAndValidity();
       if (this.beerForm.controls['photo'].invalid) {
         alert('The photo of beer is required');
       }
     }
   }
 
-  onDelete(): void {
+  protected onDelete(): void {
     this.beerDelete.emit(this.beer!);
   }
 }

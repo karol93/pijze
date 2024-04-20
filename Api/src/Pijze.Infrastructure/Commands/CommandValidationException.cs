@@ -2,9 +2,4 @@
 
 namespace Pijze.Infrastructure.Commands;
 
-public class CommandValidationException : PijzeException
-{
-    public CommandValidationException(string message) : base(message)
-    {
-    }
-}
+public class CommandValidationException(string message) : PijzeException(message);

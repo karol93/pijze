@@ -1,5 +1,6 @@
 <beer-editor
-  [beer]="beer"
+  [beer]="beer$ | async"
+  [breweries]="(breweries$ | async) ?? []"
   (beerSave)="onBeerSave($event)"
   (beerDelete)="onBeerDelete($event)"
 ></beer-editor>

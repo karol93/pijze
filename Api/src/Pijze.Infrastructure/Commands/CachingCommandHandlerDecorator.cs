@@ -3,20 +3,24 @@ using Pijze.Infrastructure.Caching;
 
 namespace Pijze.Infrastructure.Commands;
 
-internal class CachingCommandHandlerDecorator<T> : ICommandHandler<T> where T : class, ICommand
+internal class CachingCommandHandlerDecorator<T>(ICommandHandler<T> handler, ICacheStore cache) : ICommandHandler<T>
+    where T : class, ICommand
 {
-    private readonly ICommandHandler<T> _handler;
-    private readonly ICacheStore _cache;
-
-    public CachingCommandHandlerDecorator(ICommandHandler<T> handler, ICacheStore cache)
-    {
-        _handler = handler;
-        _cache = cache;
-    }
-
     public async Task HandleAsync(T command)
     {
-        await _handler.HandleAsync(command);
-        _cache.RemoveAll();
+        await handler.HandleAsync(command);
+        cache.RemoveAll();
+    }
+}
+
+internal class CachingCommandHandlerWithResultDecorator<T, TR>(ICommandHandler<T, TR> handler, ICacheStore cache)
+    : ICommandHandler<T, TR>
+    where T : class, ICommand<TR>
+{
+    public async Task<TR> HandleAsync(T command)
+    {
+        var result = await handler.HandleAsync(command);
+        cache.RemoveAll();
+        return result;
     }
 }

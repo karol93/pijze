@@ -9,11 +9,13 @@ namespace Pijze.Api.Apis;
 
 internal class BeerApi : IApi
 {
+    private const string GetBeerRouterName = "GetBeer";
+
     public void Register(WebApplication app)
     {
         var group = app.MapGroup("/api/beer");
         
-        group.MapGet("/{id:guid}", Get).RequireAuthorization("read:pijze");
+        group.MapGet("/{id:guid}", Get).RequireAuthorization("read:pijze").WithName(GetBeerRouterName);
         group.MapGet("/{id:guid}/image", GetBeerImage).RequireAuthorization("read:pijze");
         group.MapGet("/", GetAll).RequireAuthorization("read:pijze");
         group.MapPost("/", Create).RequireAuthorization("read:pijze", "admin");
@@ -38,10 +40,11 @@ internal class BeerApi : IApi
         return TypedResults.Ok(await dispatcher.QueryAsync(new GetBeers()));
     }
 
-    internal async Task<Results<Ok,BadRequest<string>>> Create(AddBeer command, ICommandDispatcher dispatcher)
+    internal async Task<Results<CreatedAtRoute<BeerDto>,BadRequest<string>>> Create(AddBeer command, ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
     {
-        await dispatcher.SendAsync(command);
-        return TypedResults.Ok();
+        var id = await commandDispatcher.SendAsync<AddBeer,Guid>(command);
+        var beer = await queryDispatcher.QueryAsync(new FindBeer(id));
+        return TypedResults.CreatedAtRoute(beer, GetBeerRouterName, new {id});
     }
 
     internal async Task<Results<NoContent, BadRequest<string>>> Update(Guid id, UpdateBeer command, ICommandDispatcher dispatcher)

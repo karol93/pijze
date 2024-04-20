@@ -5,7 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LazyLoadImageModule, LAZYLOAD_IMAGE_HOOKS } from 'ng-lazyload-image';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-import { RatingComponent, SpinnerComponent } from './components';
+import {
+  PaginatorComponent,
+  RatingComponent,
+  SpinnerComponent,
+} from './components';
 import { LazyLoadImageHooks } from './hooks';
 import { AuthImagePipe, ChunkPipe, NumberToArrayPipe } from './pipes';
 
@@ -22,6 +26,7 @@ import { AuthImagePipe, ChunkPipe, NumberToArrayPipe } from './pipes';
     RatingComponent,
     AuthImagePipe,
     SpinnerComponent,
+    PaginatorComponent,
   ],
   exports: [
     ReactiveFormsModule,
@@ -31,6 +36,7 @@ import { AuthImagePipe, ChunkPipe, NumberToArrayPipe } from './pipes';
     AuthImagePipe,
     LazyLoadImageModule,
     SpinnerComponent,
+    PaginatorComponent,
   ],
   providers: [{ provide: LAZYLOAD_IMAGE_HOOKS, useClass: LazyLoadImageHooks }],
 })
