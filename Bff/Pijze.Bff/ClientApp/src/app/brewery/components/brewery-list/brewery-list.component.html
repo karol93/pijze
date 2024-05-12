@@ -1,6 +1,8 @@
-<div *ngIf="pagination" class="m-8">
+@if(pagination){
+<div class="m-8">
   <paginator [pagination]="pagination" (pageChanged)="onPageChange($event)" />
 </div>
+}
 
 <table
   class="table-fixed border-collapse border border-slate-400 border-spacing-6 m-8 w-full"
@@ -12,7 +14,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let brewery of breweries">
+    @for(brewery of breweries; track brewery.id){
+    <tr>
       <td class="border border-slate-300 p-3 w-3/4">
         {{ brewery.name }}
       </td>
@@ -29,5 +32,6 @@
         ></i>
       </td>
     </tr>
+    }
   </tbody>
 </table>

@@ -30,9 +30,11 @@
         >
           <option value="" disabled selected>Select brewery</option>
 
-          <option *ngFor="let brewery of breweries" value="{{ brewery.id }}">
+          @for(brewery of breweries; track brewery.id){
+          <option value="{{ brewery.id }}">
             {{ brewery.name }}
           </option>
+          }
         </select>
       </div>
 
@@ -51,11 +53,11 @@
 
       <button type="submit" class="btn-blue w-full">Save</button>
 
-      <div *ngIf="beer?.id">
-        <button type="button" (click)="onDelete()" class="btn-red w-full">
-          Delete
-        </button>
-      </div>
+      @if(beer?.id){
+      <button type="button" (click)="onDelete()" class="btn-red w-full">
+        Delete
+      </button>
+      }
     </form>
   </div>
 </div>
