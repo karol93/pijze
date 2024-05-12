@@ -2,11 +2,11 @@
   <beers-filter
     [filters]="filters$ | async"
     (beersFilter)="onBeersFilter($event)"
-  ></beers-filter>
+  />
   <beer-list
     id="beer-list"
     [beers]="(beers$ | async) ?? []"
     (beerClick)="onBeerClick($event)"
-  ></beer-list>
+  />
 </div>
-<spinner [visible]="(isDataLoading$ | async) || false"></spinner>
+<spinner [visible]="(isDataLoading$ | async) || false" />

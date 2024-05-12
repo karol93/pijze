@@ -1,8 +1,5 @@
 <div *ngIf="pagination" class="m-8">
-  <paginator
-    [pagination]="pagination"
-    (pageChanged)="onPageChange($event)"
-  ></paginator>
+  <paginator [pagination]="pagination" (pageChanged)="onPageChange($event)" />
 </div>
 
 <table

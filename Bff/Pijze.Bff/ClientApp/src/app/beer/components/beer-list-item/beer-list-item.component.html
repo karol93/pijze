@@ -1,9 +1,9 @@
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
   <div class="image-container cursor-pointer">
-    <beer-image [beerId]="beer.id"></beer-image>
+    <beer-image [beerId]="beer.id" />
   </div>
   <div class="flex flex-col items-center p-5">
-    <rating [rating]="beer.rating" [readOnly]="true" class="m-1"></rating>
+    <rating [rating]="beer.rating" [readOnly]="true" class="m-1" />
     <p class="font-light text-sm text-slate-500 m-1">{{ beer.brewery }}</p>
     <p class="font-bold text-lg m-1">{{ beer.name }}</p>
   </div>

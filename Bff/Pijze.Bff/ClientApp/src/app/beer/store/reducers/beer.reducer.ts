@@ -62,7 +62,7 @@ export const beerReducer = createFeature({
       beers: [
         {
           id: beer.id!,
-          brewery: 'dipa',
+          brewery: state.breweries.find((x) => x.id == beer.breweryId)?.name!,
           name: beer.name,
           rating: beer.rating,
         },
